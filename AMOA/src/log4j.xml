@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+ 
+
+<!-- Pour que ce fichier soit utilisé, il faut : 
+	1°) ajouter les .jar qui faut (log4j)
+	2°) déclarer le logger dans la classe contenant le main (ou le runner si c'est un test) :
+			public static Logger logger = Logger.getLogger(AllTestsTP3.class);  // Par exemple pour le test AllTestTP3
+ -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+
+ 
+ <!-- ============================== -->
+ <!-- Append messages to the console -->
+ <!-- ============================== -->
+ 
+ <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+ 
+ <layout class="org.apache.log4j.PatternLayout">
+ <!-- The default pattern: Date Priority [Category] Message\n -->
+ <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
+ </layout>
+ </appender>
+
+<logger name="org.hibernate">
+    <level value="info"/>
+</logger>
+
+<logger name="org.hibernate.SQL">
+    <level value="info"/>
+</logger>
+
+<logger name="org.hibernate.type">
+    <level value="trace"/>
+</logger>
+
+ <root>
+ <appender-ref ref="CONSOLE"/>
+ </root>
+ 
+ 
+</log4j:configuration>

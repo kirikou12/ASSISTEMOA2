@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+
+
+	<definition name="accueil" page="/PAGES/welcome.jsp">
+		<put name="title" type="string" value="Page d'accueil" />		
+		<put name="header" value="/PAGES/top.jsp"/>	
+		<put name="article" value="/PAGES/vide.jsp" />
+		<put name="aside" value="/PAGES/vide.jsp"  />	
+		
+	</definition>
+
+	<definition name="commenter" extends="welcome">
+		<put name="title" type="string" value="Poster un commentaire" />
+		<put name="article" value="/PAGES/commentaire.jsp" />
+		<put name="aside" value="/PAGES/vide.jsp" />
+	</definition>
+	
+	
+	<definition name="listerDemandes" extends="welcome">
+		<put name="title" type="string" value="Liste des demandes" />
+		<put name="article" value="/PAGES/listeDemandes.jsp" />
+		<put name="aside" value="/PAGES/vide.jsp" />
+	</definition>
+	
+
+</tiles-definitions>

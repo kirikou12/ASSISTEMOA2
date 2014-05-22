@@ -1,0 +1,25 @@
+/* style d'une demande*/  
+.agregat{
+	//border: solid 1px black;
+}
+.contenu{
+	border: solid 1px black;
+	width: 500px;
+}
+.contenu, .titre{
+	padding: 5px;
+	display: inline-block;
+	vertical-align: top;
+}
+.titre{
+	//border: solid 1px black;
+	width: 120px;
+}
+hr{
+	width: 30%;
+	margin-top: 60px;
+	margin-left: 137px;
+}
+body{
+	padding: 5px;
+}

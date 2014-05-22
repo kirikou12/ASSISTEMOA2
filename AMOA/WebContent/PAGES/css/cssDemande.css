@@ -1,0 +1,92 @@
+/* style de vote*/  
+.pourcentage {
+	width: 100px;
+	height: 6px;
+	background-color: rgb(215, 215, 215);
+}
+#pourcent {
+	height: 6px;
+	background-color: green;
+	color: green;
+}
+A:link {text-decoration: none}
+a img
+{
+	border: none;
+} 
+.vote{
+	//border: solid 1px black;
+	margin-top: 6px;
+	margin-left: 540px;
+	width: 100px;
+}
+#ko{
+	margin-left: 55px;
+}
+
+/* style d'une demande*/  
+.demande{
+	//border: solid 1px black;
+}
+#modifier{
+	position: fixe;	
+	left: 425px;
+	display: none;
+	//background: red;	
+}
+.contenu{
+	border: solid 1px black;
+	width: 500px;
+}
+.contenu, .titre{
+	padding: 5px;
+	display: inline-block;
+	vertical-align: top;
+}
+.titre{
+	//border: solid 1px black;
+	width: 120px;
+}
+#suivre{
+	position: absolute;
+	margin-left: 135px;
+	margin-top: 6px;
+}
+hr{
+	width: 30%;
+	margin-top: 60px;
+	margin-left: 137px;
+}
+body{
+	padding: 5px;
+}
+
+/* style d'un commentaire*/  
+.comments{
+	margin-top: 20px;
+	margin-left: 137px;
+	//border: solid 1px black;
+	width: 500px;
+}
+.titreComment{
+	//border: solid 1px black;
+	width: 120px;
+	margin-left:-140px;
+}
+.comment, .titreComment{
+	padding: 5px;
+	display: inline-block;
+	vertical-align: top;
+}
+#commentTextarea{
+	width: 492px;
+	border: solid 1px black;
+	margin-left: 137px;
+	padding: 8px;
+}
+#submitComment, #labelTextarea{
+	margin-left: 137px;
+}
+#formComment{
+	margin-top:20px;
+}

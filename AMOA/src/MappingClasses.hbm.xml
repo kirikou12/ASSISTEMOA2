@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+	<class name="Demande" table="demande_redmine" lazy="false">
+		<id name="demandeId" type="integer" column="demandeId">
+			<generator class="native" />
+		</id>
+
+		<property name="projet" type="string"/>
+		<property name="sujet" type="string"/>
+		<property name="description" type="string"/>
+		<property name="tracker" type="string"/>
+		<property name="statut" type="string"/>
+		<property name="priorite" type="string"/>
+		<property name="criticite" type="string"/>
+		<property name="versionCible" type="string"/>
+		<property name="versionApplication" type="string"/>		
+		
+		<property name="demandeIdRMINE" type="integer"/>
+		<property name="tempsEstime" type="integer"/>
+		<property name="tempsVendu" type="integer"/>
+		
+		<property name="pourcentageRealise" type="double"/>
+		
+		<property name="echeance" type="timestamp"/>
+		<property name="cree" type="timestamp"/>
+		<property name="ferme" type="timestamp"/>
+		<property name="miseAJours" type="timestamp"/>
+		<property name="debut" type="timestamp"/>
+		
+
+		<many-to-one name="auteur" class="User" lazy="false"/>
+		<many-to-one name="assigneA" class="User"/>
+		<many-to-one name="agregat" class="Agregat"/>
+		
+		<set name="comments" inverse="true" cascade="all" fetch="join"
+			lazy="true" order-by="date">
+			<key column="demandeId" />			
+			<one-to-many class="Comment" />
+			<!-- exemple : Hibernate Mapping ArrayList : http://www.tutorialspoint.com/hibernate/hibernate_list_mapping.htm -->
+		</set>
+		<set name="votes" inverse="true" cascade="all" fetch="join"
+			lazy="false">
+			<key column="demandeId" />			
+			<one-to-many class="Vote" />
+		</set>
+		<set name="manuels" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="demandeId" />			
+			<many-to-many class="Manuel" column="id"/>
+		</set>
+		<set name="chapitres" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="demandeId" />			
+			<many-to-many class="Chapitre" column="id"/>
+		</set>
+		<set name="pieceJointes" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="idPost" />			
+			<one-to-many class="File"/>
+		</set>
+		
+	</class>
+
+	
+<!-- Classe: COMMENT -->
+	<class name="Comment" table="comment" lazy="true">
+		<id name="commentId" type="integer" column="commentId">
+			<generator class="native" />
+		</id>
+		
+		<property name="date" type="timestamp"/>
+		<property name="content" type="string" column="content" />
+
+		<many-to-one name="author" class="User" column="author" 
+		     fetch="join" />
+		<many-to-one name="demande" class="Demande" column="demandeId" 
+		     fetch="join" />
+		<set name="reponses" inverse="true" cascade="all" fetch="join"
+			lazy="false">
+			<key column="commentId" />
+			<one-to-many class="Reponse" />
+		</set>
+				
+	</class>
+
+
+
+<!-- Classe REPONSE -->	
+	<class name="Reponse" table="reponse" lazy="true">
+		<id name="reponseId" type="integer">
+			<generator class="native" />
+		</id>
+		
+		<property name="date" type="timestamp"/>
+		<property name="content" type="string" column="content" />
+
+		<many-to-one name="author" class="User" column="author" 
+		     fetch="join" />
+		<many-to-one name="comment" class="Comment" column="commentId" 
+		     fetch="join" />
+		<set name="reponses" inverse="true" cascade="all" fetch="join"
+			lazy="false">
+			<key column="parentId" />			
+			<one-to-many class="Reponse"/>
+		</set>
+				
+	</class>
+
+	
+<!-- Classe: GROUPE -->	
+	<class name="Groupe" table="groupe" lazy="true">
+		<id name="groupeId" type="integer" column="groupeId">
+			<generator class="increment" />
+		</id>
+
+		<property name="entitled" type="string" column="title" />
+		<property name="description" type="string" column="description" />
+
+		<many-to-one name="author" class="User" column="autheur" />
+
+		<set name="members" inverse="true" cascade="all" fetch="join"
+			lazy="true" table="groupe_member">
+			<key column="groupeId" />
+			<many-to-many class="User" column="id" />
+		</set>
+		
+	</class>
+
+	<class name="User" table="user" lazy="true">
+		<id name="id" type="integer" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="userName" type="string" column="username" />
+		<property name="firstNam" type="string" column="nom" />
+		<property name="lastName" type="string" column="prenom" />
+		<property name="email" type="string" column="email" />
+		<property name="password" type="string" column="password" />
+		<property name="admin" type="boolean" column="admin" />
+		
+		
+		<set name="amis" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="id" />
+			<one-to-many class="User" />
+		</set>
+
+	</class>
+	
+	<class name="Vote" table="vote" lazy="true">
+		<id name="id" type="integer" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="vote" type="boolean" column="voteValue" />
+		<many-to-one name="auteur" class="User" column="userId"/>
+		<many-to-one name="demande" class="Demande" column="demandeId"/>
+	</class>
+	
+	<class name="Agregat" table="agregat" lazy="true">
+		<id name="id" type="integer" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="titre" type="string"/>
+		<property name="synthese" type="string"/>
+		<set name="demandes" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="agregat" />
+			<one-to-many class="Demande"/>
+		</set>
+	</class>
+	<class name="Manuel" table="manuel" lazy="true">
+		<id name="id" type="integer" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="titre" type="string"/>		
+		
+		<!-- inverse="true" : ne permet plus aux indx de s'incrémenter -->
+		<list name="chapitres" cascade="all" lazy="false" fetch="join" >
+	         <key column="IdManuel"/>
+	         <list-index column="indx"/>
+	         <one-to-many class="Chapitre"/>
+		</list>
+	</class>
+	
+	<class name="Chapitre" table="chapitre" lazy="true">
+		<id name="id" type="integer" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="titre" type="string"/>
+		<property name="numero" type="integer"/>
+		<many-to-one name="manuel" class="Manuel" column="idManuel"/>
+		<many-to-one name="aChapitre" class="Chapitre" column="chapitreParent"/>		
+	
+		<list name="sousChapitres"  cascade="all" fetch="join"
+			lazy="false" >
+	         <key column="chapitreParent"/>
+	         <list-index column="indx"/>
+	         <one-to-many class="Chapitre"/>
+      	</list>
+		
+	</class>
+	
+<!-- La classe File -->
+	
+	<class name="File" table="file" lazy="true">
+		<id name="id" type="integer" column="id">
+			<generator class="increment" />
+		</id>
+		<property name="name" type="string"/>
+		<property name="size" type="integer"/>
+		<property name="data" type="binary"/>
+		<many-to-one name="poste" class="Demande" column="idPost"/>		
+		
+	</class>
+	
+<!-- La classe Offre -->
+	
+	<class name="Offre" table="offre" lazy="true">
+		<id name="idOffre" type="integer" column="idOffre">
+			<generator class="increment" />
+		</id>
+		<property name="description" type="string"/>
+		<property name="prix" type="double"/>
+		<many-to-one name="demande" class="Demande" column="idDemande"/>
+		<many-to-one name="prestataire" class="User" column="idPrestataire"/>		
+		
+	</class>
+	
+<!-- Les requêtes HQL -->
+
+	<sql-query name="userByName">
+		<return alias="user" class="metier.User" />
+		SELECT user.id AS {user.id},
+		user.nom AS {user.firstNam},
+		user.prenom AS {user.lastName},
+		user.email AS {user.email},
+		user.username AS {user.userName},
+		user.password AS {user.password},
+		user.admin AS {user.admin}
+		FROM user user WHERE user.username LIKE :userName
+	</sql-query>
+	
+</hibernate-mapping>

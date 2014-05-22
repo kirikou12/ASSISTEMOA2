@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "dtd/struts-config_1_3.dtd">
+
+<!--
+     Squelette du fichier de configuration du controleur STRUTS
+-->
+
+
+<struts-config>
+
+
+<!-- ================================================ Form Bean Definitions -->
+
+    <form-beans>
+		<form-bean name="beanReg" type="action.form.BeanFormRegister" />
+		<form-bean name="beanAuth" type="action.form.BeanFormAuth" />
+		<form-bean name="beanEnregDemande" type="action.form.BeanFormDemande" />
+		<form-bean name="beanGroupe" type="action.form.BeanFormGroupe" />
+		<form-bean name="beanComment" type="action.form.BeanFormComment" />
+		<form-bean name="beanIds" type="action.form.BeanFormSelectedIds" />
+		<form-bean name="beanAgregat" type="action.form.BeanFormAgregat" />
+		<form-bean name="beanChapitre" type="action.form.BeanFormChapitre" />
+		<form-bean name="beanDemande" type="action.form.DemandeBean" />			
+		<form-bean name="beanOffre" type="action.form.BeanFormOffre" />
+		<form-bean name="ids" type="action.form.IDSBean" />		 
+		
+    </form-beans>
+
+
+<!-- ========================================= Global Exception Definitions -->
+
+    <global-exceptions>
+
+    </global-exceptions>
+
+
+<!-- =========================================== Global Forward Definitions -->
+
+    <global-forwards>
+		<forward name="identif" path="../index.jsp" />
+    </global-forwards>
+
+
+<!-- =========================================== Action Mapping Definitions -->
+
+	
+    <action-mappings>
+        
+        <action path="/test"
+            	type="action.ActionTest"
+    			name="ids"
+    			validate="true"
+    			input="upload.jsp"
+    			scope="request">            
+        </action>
+        <action path="/listMembreAuto" 
+    			type="action.ActionUploadMembres"
+    			parameter="upload"
+    			validate="true"
+    			input="upload.jsp"
+    			scope="request">
+    	</action>
+        
+        <action path="/upload" 
+    			type="action.ActionUpload"
+    			parameter="upload"
+    			validate="true"
+    			input="upload.jsp"
+    			scope="request">
+    	</action> 
+        	
+<!-- Actions qui concernce le User (Gestion du compte...) -->
+    	<action path="/Sinscrire" 
+    			type="org.springframework.web.struts.DelegatingActionProxy"
+    			parameter="inscription"
+    			name="beanReg"
+    			validate="true"
+    			input="index.jsp"
+    			scope="request">
+    		<forward name="welcome" path="/PAGES/welcome.jsp" redirect="true"></forward>
+    	</action>    	
+    	<action path="/auth" 
+    			type="org.springframework.web.struts.DelegatingActionProxy"
+    			parameter="authentification"
+    			name="beanAuth"
+    			validate="true"
+    			input="index.jsp"
+    			scope="request">
+    		<forward name="welcome" path="/PAGES/welcome.jsp" redirect="true"></forward>
+    		<!-- redirect ="true" est indispensable, sinon le css de la page ne se charge pas, cela pourrait être utile pour résoudre ce probleme de css qd on utlise les tiles (à tester). 
+    		Si à la fin de votre Action vous choisissez le <forward> de nom "jsp", Struts va vous renvoyer la page jsp.jsp, 
+    		mais sans changer l'url http://monserveur/monapplication/monAction.do dans votre navigateur.
+    		Or il peut être intéressant ou souhaité parfois de changer l'url affichée dans le navigateur pour laisser apparaître 
+    		la véritable url de la ressource affichée-->
+    	</action> 
+    	<action path="/afficherMembres" 
+    			type="org.springframework.web.struts.DelegatingActionProxy"
+    			parameter="afficherMemebres"
+    			validate="true"
+    			input="index.jsp"
+    			scope="request">
+    		<forward name="succes" path="/PAGES/users.jsp" redirect="true"></forward>
+    	</action>
+    	<action path="/chargerMembres" 
+    			type="org.springframework.web.struts.DelegatingActionProxy"
+    			parameter="chargerMembres"
+    			validate="true"
+    			scope="request">
+    	</action>	
+    	
+    		
+    	
+<!-- Actions qui concernce une demande -->
+    	<action path="/creerDemande" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="create"   			
+    			validate="true"
+    			input="/PAGES/demandeForm.jsp"
+    			name="beanDemande"
+    			scope="request">
+    			<!-- le redirect=true m'a posé un probleme au niveau de l'affichage des demandes de la rêq http-->
+    		<forward name="succes" path="/PAGES/commentaire.jsp" />    		
+    	</action>    	
+    	<action path="/demandesAffichageStandard" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="affichageStandard"   			
+    			validate="true"
+    			input="/PAGES/welcome.jsp"
+    			scope="request">
+    			<!-- le redirect=true m'a posé un probleme au niveau de l'affichage des demandes de la rêq http-->
+    		<forward name="listeDemande" path="/PAGES/demandes.jsp" />    		
+    	</action>
+    	<action path="/afficherDemande" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="affichage"  			
+    			validate="true"
+    			input="/PAGES/demandes.jsp"
+    			scope="request">
+    		<forward name="showComments" path="/PAGES/commentaire.jsp"/>    		
+    	</action>
+    	<action path="/modifierDemande"
+    	    	type="org.springframework.web.struts.DelegatingActionProxy"
+    	    	parameter="affichage2"
+    	    	validate="true"
+    	    	input="/PAGES/demandes.jsp"
+    	    	scope="request">
+    	    <forward name="success" path="/PAGES/detailsDemande.jsp"/>    	    
+    	</action>
+    	<action path="/suivreDemande" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="suivre"   			
+    			validate="true"
+    			input="/PAGES/commentaire.jsp"
+    			scope="request"/>
+    	<action path="/voterDemande" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="voter"   			
+    			validate="true"
+    			input="/PAGES/commentaire.jsp"
+    			scope="request"/>
+    	<action path="/sauveModificationDemande"
+    	    	type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="modifier"     			
+    			validate="true"
+    			name="beanEnregDemande"
+    			input="/PAGES/detailsDemande.jsp"
+    			scope="request"> 
+    			<forward name="success" path="/PAGES/demandes.jsp" redirect="true"/>
+    	</action>
+    	<action path="/demandesTrieesParPeriorite"
+    	    	type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="trierParPriorite"     			
+    			validate="true"
+    			input="/PAGES/welcome.jsp"
+    			scope="request"> 
+    			<forward name="success" path="/PAGES/demandesTrieesParPriorite.jsp"/>
+    	</action>  
+    	  	
+    	
+    	
+<!-- Actions qui concernce l'agregat -->
+    	
+    	<action path="/afficherAgregat" 
+    	    	type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="afficherAgregat"    			   			
+    			validate="true"
+    			input="/PAGES/welcome.jsp"
+    			scope="request">
+    		<forward name="success" path="/PAGES/agregat.jsp"/>    		
+    	</action>
+    	<action path="/afficherAgregats" 
+    	    	type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="afficher"    			   			
+    			validate="true"
+    			input="/PAGES/welcome.jsp"
+    			scope="request">
+    		<forward name="listeAgregat" path="/PAGES/garegats.jsp"/>    		
+    	</action>
+    	<action path="/fusionnerDemandesSelectionees" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="fusion1"    			
+    			validate="true"
+    			name="beanIds"
+    			input="/PAGES/demandes.jsp"
+    			scope="request">   
+    			<forward name="fusion2" path="/PAGES/agregat_form.jsp" redirect="true"/>		
+    	</action>
+    	<action path="/regrouper"
+    	    	type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="fusion2"    			
+    			validate="true"
+    			name="beanAgregat"
+    			input="/PAGES/demandes.jsp"
+    			scope="request">   
+    			<forward name="success" path="/PAGES/agregat.jsp" redirect="true"/>
+    	</action>  
+    	
+    	
+    	
+<!-- Actions qui concernce un groupe -->
+    	<action path="/creerGroupe" 
+				type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="create"    			
+    			name="beanGroupe"
+    			validate="true"
+    			input="/PAGES/monForm.jsp"
+    			scope="request"/>  
+		<action path="/afficherGroupes" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="afficherList"   			
+    			validate="true"
+    			input="/PAGES/welcome.jsp"
+    			scope="request">
+    		<forward name="listeGroupe" path="/PAGES/listeGroupes.jsp" redirect="true"/>    		
+    	</action>
+    	<action path="/afficherGroupe" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="afficher"   			
+    			validate="true"
+    			input="/PAGES/welcome.jsp"
+    			scope="request">
+    		<forward name="SUCCESS" path="/PAGES/groupe.jsp" redirect="true"/>    		
+    	</action>
+    	<action path="/inviterMembre" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="inviter"   			
+    			validate="true"
+    			name="beanIds"
+    			input="/PAGES/groupe.jsp"
+    			scope="request">
+    		<forward name="SUCCESS" path="/PAGES/groupe.jsp" redirect="true"/>    		
+    	</action>
+    	
+    			   	
+    	
+    	
+<!-- Actions qui concernce le commentaire -->
+    	<action path="/sauvegarderCommentaire" 
+    			type="action.ActionSaveComment"
+    			name="beanComment"
+    			validate="true"
+    			input="/PAGES/commentaire.jsp"
+    			scope="request">
+    	</action>
+    	
+    	
+    	
+<!--Le sactions qui concernent un chapitre -->
+
+    	<action path="/chargerChapitres"
+    	    	type="action.ActionChargerChapitre"    			
+    			validate="true"
+    			input="/PAGES/demandes.jsp"
+    			scope="request">  
+    	</action>  
+   
+<!-- Les actions qui concernent une Offre -->
+		
+		<action path="/proposerOffre"
+		    	type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="proposerOffre"   			
+    			validate="true"
+    			name="beanOffre"
+    			input="/PAGES/offreForm.jsp"
+    			scope="request">
+		    
+		</action>	
+    	    	
+    </action-mappings>
+    
+    
+
+<!-- ======================================== Message Resources Definitions -->
+
+    <message-resources parameter="MessageResources" />
+
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+		<set-property property="moduleAware" value="true" />
+	</plug-in>
+
+
+	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+        <set-property property="contextConfigLocation"
+                      value="/WEB-INF/beans.xml"/>
+    </plug-in>
+</struts-config>
+

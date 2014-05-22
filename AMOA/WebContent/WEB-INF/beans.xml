@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="DAODemande" class="dao.hibernate.DAODemandeHBM"/>
+	<bean id="DAOUser" class="dao.hibernate.DAOUserHBM"/>
+	<bean id="DAOVote" class="dao.hibernate.DAOVoteHBM"/>
+	<bean id="DAOManuel" class="dao.hibernate.DAOManuelHBM"/>
+	<bean id="DAOGroupe" class="dao.hibernate.DAOGroupeHBM"/>
+	<bean id="DAOComment" class="dao.hibernate.DAOCommentHBM"/>
+	<bean id="DAOChapitre" class="dao.hibernate.DAOChapitreHBM"/>
+	<bean id="DAOAgregat" class="dao.hibernate.DAOAgregatHBM"/>
+	<bean id="DAOOffre" class="dao.hibernate.DAOOffreHBM"/>
+		
+	
+	
+<!-- USER -->	
+		<bean name="/Sinscrire" class="action.ActionUser">
+	        <property name="daoUser">
+	            <ref bean="DAOUser"/>
+	        </property>
+	    </bean>    
+	    <bean name="/auth" class="action.ActionUser">
+	        <property name="daoUser">
+	            <ref bean="DAOUser"/>
+	        </property>
+	    </bean> 
+	    <bean name="/afficherMembres" class="action.ActionUser">
+	        <property name="daoUser">
+	            <ref bean="DAOUser"/>
+	        </property>
+	    </bean> 
+	    <bean name="/chargerMembres" class="action.ActionUser">
+	        <property name="daoUser">
+	            <ref bean="DAOUser"/>
+	        </property>
+	    </bean> 
+ 
+	
+	    
+      
+<!-- DEMANDE -->    
+
+	    <bean name="/creerDemande" class="action.ActionDemande">
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	        <property name="daoUser">
+	            <ref bean="DAOUser"/>
+	        </property>        
+	    </bean>
+	    <bean name="/afficherDemande" class="action.ActionDemande">
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	    </bean>
+	    <bean name="/modifierDemande" class="action.ActionDemande">
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	    </bean>    
+	    <bean name="/demandesAffichageStandard" class="action.ActionDemande">
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	    </bean>  
+	    <bean name="/suivreDemande" class="action.ActionDemande">
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	    </bean>  
+	    <bean name="/voterDemande" class="action.ActionDemande">
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	         <property name="daoVote">
+	            <ref bean="DAOVote"/>
+	        </property>
+	    </bean>
+	    <bean name="/sauveModificationDemande" class="action.ActionDemande">
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	    </bean>
+	    <bean name="/demandesTrieesParPeriorite" class="action.ActionDemande">
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	    </bean> 
+    
+	    
+	    
+	    
+<!-- AGREGAT -->  
+  
+	    <bean name="/afficherAgregat" class="action.ActionAgregat">
+	        <property name="daoAgregat">
+	            <ref bean="DAOAgregat"/>
+	        </property>
+	    </bean> 
+	    <bean name="/afficherAgregats" class="action.ActionAgregat">
+	        <property name="daoAgregat">
+	            <ref bean="DAOAgregat"/>
+	        </property>
+	    </bean> 
+	     <bean name="/fusionnerDemandesSelectionees" class="action.ActionAgregat">
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	    </bean> 
+	    <bean name="/regrouper" class="action.ActionAgregat">
+	        <property name="daoAgregat">
+	            <ref bean="DAOAgregat"/>
+	        </property>
+	        <property name="daoDemande">
+	            <ref bean="DAODemande"/>
+	        </property>
+	    </bean> 
+
+	    
+	    
+	    
+	    
+
+<!-- GROUPE -->
+
+	     <bean name="/creerGroupe" class="action.ActionGroupe">
+	        <property name="daoGroupe">
+	            <ref bean="DAOGroupe"/>
+	        </property>        
+	    </bean> 
+	    <bean name="/afficherGroupes" class="action.ActionGroupe">
+	        <property name="daoGroupe">
+	            <ref bean="DAOGroupe"/>
+	        </property>        
+	    </bean>
+	    <bean name="/afficherGroupe" class="action.ActionGroupe">
+	        <property name="daoGroupe">
+	            <ref bean="DAOGroupe"/>
+	        </property>        
+	    </bean>
+	    
+	    <bean name="/inviterMembre" class="action.ActionGroupe">
+	        <property name="daoGroupe">
+	            <ref bean="DAOGroupe"/>
+	        </property>   
+	        <property name="daoUser">
+	            <ref bean="DAOUser"/>
+	        </property>     
+	    </bean>
+  
+	    
+	    
+	    
+	    
+	    
+<!-- OFFRE -->
+
+		<bean name="/proposerOffre" class="action.ActionOffre">
+		       <property name="daoOffre">
+		           <ref bean="DAOOffre"/>
+		       </property> 	
+		        <property name="daoDemande">
+		           <ref bean="DAODemande"/>
+		       </property> 		           
+		</bean>
+	
+</beans>
