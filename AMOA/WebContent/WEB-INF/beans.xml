@@ -12,6 +12,7 @@
 	<bean id="DAOChapitre" class="dao.hibernate.DAOChapitreHBM"/>
 	<bean id="DAOAgregat" class="dao.hibernate.DAOAgregatHBM"/>
 	<bean id="DAOOffre" class="dao.hibernate.DAOOffreHBM"/>
+	<bean id="DAODiscussion" class="dao.hibernate.DAODiscussionHBM"/>
 		
 	
 	
@@ -90,7 +91,18 @@
 	    </bean> 
     
 	    
+<!-- Discussion -->  
+	    <bean name="/afficherDiscussions" class="action.ActionDiscussion">
+	        <property name="daoDiscussion">
+	            <ref bean="DAODiscussion"/>
+	        </property>
+	    </bean>
 	    
+	    <bean name="/afficherDiscussion" class="action.ActionDiscussion">
+	        <property name="daoDiscussion">
+	            <ref bean="DAODiscussion"/>
+	        </property>
+	    </bean>	    
 	    
 <!-- AGREGAT -->  
   

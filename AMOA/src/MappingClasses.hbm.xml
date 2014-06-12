@@ -34,16 +34,12 @@
 		<many-to-one name="assigneA" class="User"/>
 		<many-to-one name="agregat" class="Agregat"/>
 		
-		<set name="comments" inverse="true" cascade="all" fetch="join"
-			lazy="true" order-by="date">
-			<key column="demandeId" />			
-			<one-to-many class="Comment" />
-			<!-- exemple : Hibernate Mapping ArrayList : http://www.tutorialspoint.com/hibernate/hibernate_list_mapping.htm -->
-		</set>
+		
 		<set name="votes" inverse="true" cascade="all" fetch="join"
 			lazy="false">
 			<key column="demandeId" />			
 			<one-to-many class="Vote" />
+			<!-- exemple : Hibernate Mapping ArrayList : http://www.tutorialspoint.com/hibernate/hibernate_list_mapping.htm -->
 		</set>
 		<set name="manuels" inverse="true" cascade="all" fetch="join"
 			lazy="true">
@@ -72,11 +68,8 @@
 		
 		<property name="date" type="timestamp"/>
 		<property name="content" type="string" column="content" />
-
-		<many-to-one name="author" class="User" column="author" 
-		     fetch="join" />
-		<many-to-one name="demande" class="Demande" column="demandeId" 
-		     fetch="join" />
+		<many-to-one name="discussion" class="Discussion" column="discussionId" fetch="join"/>
+		<many-to-one name="author" class="User" column="author" fetch="join" />		
 		<set name="reponses" inverse="true" cascade="all" fetch="join"
 			lazy="false">
 			<key column="commentId" />
@@ -85,6 +78,21 @@
 				
 	</class>
 
+<!-- Classe: Discussion -->
+	<class name="Discussion" table="discussion" lazy="true">
+		<id name="id" type="integer" column="discussionId">
+			<generator class="native" />
+		</id>
+		
+		<one-to-one name="objet" class="Demande" fetch="join"/>
+		
+		<set name="comments" inverse="true" cascade="all" fetch="join"
+			lazy="true" order-by="date">
+			<key column="discussionId" />			
+			<one-to-many class="Comment" />			
+		</set>
+				
+	</class>
 
 
 <!-- Classe REPONSE -->	

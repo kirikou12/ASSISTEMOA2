@@ -35,6 +35,7 @@
 <br><br><br><br><br>
 
 	<div class="demande">
+	<bean:define id="demande" name="discussion" property="objet"></bean:define>
 		<div class="titre">
 			<strong><bean:write name="demande"
 					property="auteur.firstNam" /></strong> <br>
@@ -83,7 +84,7 @@
 
 
 	<div class="comments">
-		<logic:iterate id="commento" name="demande" property="comments">
+		<logic:iterate id="commento" name="discussion" property="comments">
 			<div class="comment">
 				<div class="titreComment">
 					<strong><bean:write name="commento"

@@ -32,7 +32,7 @@ public class ActionSaveComment extends Action {
 		Comment comment = new Comment();
 		comment.setContent(beanComment.getComment());
 		comment.setAuthor(user);
-		comment.setDemande(((Demande)request.getSession().getAttribute("demande")));
+		//comment.setDemande(((Demande)request.getSession().getAttribute("demande")));
 		daoComment.save(comment);		
 		
 		

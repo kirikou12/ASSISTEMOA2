@@ -46,6 +46,7 @@
 							<html:link action="/demandesTrieesParPeriorite.do">Demandes par priorité</html:link>	
 								</a></li>
 							<li><a href="${pageContext.request.contextPath}/PAGES/demandeForm.jsp">Créer demande</a></li>
+							<li><a href="${pageContext.request.contextPath}/afficherDiscussions.do">Discussions</a></li>
 						</ul>
 					</li>
 					

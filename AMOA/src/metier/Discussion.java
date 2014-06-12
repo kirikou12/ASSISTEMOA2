@@ -2,6 +2,8 @@ package metier;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Discussion implements Serializable {
 
@@ -10,8 +12,9 @@ public class Discussion implements Serializable {
 	 */
 	private static final long serialVersionUID = 7463229988016662126L;
 
+	private int id = -1;
 	private Demande objet; //Objet de la discussion
-	private ArrayList<Comment> comments;
+	private Set<Comment> comments = new HashSet<Comment>();
 	
 	public Discussion(){}
 
@@ -23,11 +26,19 @@ public class Discussion implements Serializable {
 		this.objet = objet;
 	}
 
-	public ArrayList<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(ArrayList<Comment> comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}	
 }

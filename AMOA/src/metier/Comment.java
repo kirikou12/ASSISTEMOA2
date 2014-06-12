@@ -15,7 +15,7 @@ public class Comment implements Serializable {
 	private int commentId = -1;
 	private String content;
 	private User author;
-	private Demande demande;
+	private Discussion discussion;
 	private Timestamp date;
 	private Set<Reponse> reponses = new HashSet<Reponse>();
 	
@@ -53,20 +53,19 @@ public class Comment implements Serializable {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
-
-	public Demande getDemande() {
-		return demande;
-	}
-
-	public void setDemande(Demande demande) {
-		this.demande = demande;
-	}
-
 	public Set<Reponse> getReponses() {
 		return reponses;
 	}
 
 	public void setReponses(Set<Reponse> reponses) {
 		this.reponses = reponses;
+	}
+
+	public Discussion getDiscussion() {
+		return discussion;
+	}
+
+	public void setDiscussion(Discussion discussion) {
+		this.discussion = discussion;
 	}
 }
