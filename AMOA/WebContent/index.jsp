@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html"%>
+    <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>        
@@ -8,42 +9,33 @@
 </head>
     <body>
 		<div class="wrapper">
-			<div class="content">
+			<div class="content">				
 				<div id="form_wrapper" class="form_wrapper">
 					<html:form  styleClass="register" action="/Sinscrire.do">
 						<h3>Inscription</h3>
 						<div class="column">
 							<div>
-								<label>Nom:</label>
-								<html:text property="firstNam"  styleClass="input"/>
-								<span class="error">This is an error</span>
+								<label>								
+								<bean:message key="firstname.label"/>:</label>
+								<html:text property="firstNam"  styleClass="input"/>								
 							</div>
 							<div>
-								<label>Prènom:</label>
+								<label><bean:message key="firstname.label"/>:</label>
 								<html:text property="lastName" styleClass="input"/>
-								<span class="error">This is an error</span>
 							</div>
 							<div>
-								<label>Site web:</label>
+								<label><bean:message key="website.label"/>:</label>
 								<html:text property="website" styleClass="input" value="http://"/>
-								<span class="error">This is an error</span>
 							</div>
 						</div>
-						<div class="column">
-							<div>
-								<label>Pseudo:</label>
-								<html:text property="userName" styleClass="input"/>
-								<span class="error">This is an error</span>
-							</div>
+						<div class="column">							
 							<div>
 								<label>Email:</label>
 								<html:text property="email" styleClass="input" />
-								<span class="error">This is an error</span>
 							</div>
 							<div>
 								<label>Mot de passe:</label>
 								<html:text property="password" styleClass="input" />
-								<span class="error">This is an error</span>
 							</div>
 						</div>
 						<div class="bottom">							
@@ -55,7 +47,12 @@
 					<html:form styleClass="login active" action="/auth.do">
 						<h3>Identification</h3>
 						<div>
-							<label>Pseudo:</label>
+							<label>
+								<font color="red">			                    
+				                    <html:errors property="WrongUserName" />
+				                </font><br><br>
+								Pseudo:								
+			                </label>
 							
 							<html:text property="userName"  styleClass="input"/>
 							<span class="error">This is an error</span>

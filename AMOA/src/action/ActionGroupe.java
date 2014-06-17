@@ -94,10 +94,7 @@ public class ActionGroupe extends MappingDispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		BeanFormSelectedIds beanIds = (BeanFormSelectedIds) form;
-		for (String id : beanIds.getSelectedIds()) {
-			System.out.println(id);
-		}
-		//Gérer l'invitation des membres			
+				//Gérer l'invitation des membres			
 		return mapping.findForward("SUCCESS");
 	}
 

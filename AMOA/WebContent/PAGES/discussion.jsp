@@ -23,7 +23,7 @@
 
 <!-- Fin Text editor includes -->
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/PAGES/js/dialogBox.js"></script>
+	src="${pageContext.request.contextPath}/PAGES/js/myJQuery.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/PAGES/js/jquery.form.js"></script>
 <link rel="stylesheet" type="text/css"

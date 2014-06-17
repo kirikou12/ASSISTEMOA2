@@ -1,5 +1,7 @@
 package action.form;
 
+import java.util.List;
+
 import org.apache.struts.action.ActionForm;
 
 public class IDSBean extends ActionForm {
@@ -9,17 +11,18 @@ public class IDSBean extends ActionForm {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String membres;
+	private String[] titres;
+
 
 	public IDSBean(){
 		
 	}
 
-	public String getMembres() {
-		return membres;
+	public String[] getTitres() {
+		return titres;
 	}
 
-	public void setMembres(String membres) {
-		this.membres = membres;
+	public void setTitres(String[] titres) {
+		this.titres = titres;
 	}
 }

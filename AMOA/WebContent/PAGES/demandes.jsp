@@ -32,14 +32,14 @@ a img
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/PAGES/js/jquery-1.4.2.min.js"></script>
+	src="${pageContext.request.contextPath}/PAGES/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/PAGES/js/jquery-ui-1.8.4.custom.min.js"></script>
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/PAGES/js/jquery.form.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/PAGES/js/dialogBox.js"></script>
+	src="${pageContext.request.contextPath}/PAGES/js/myJQuery.js"></script>
 <%-- FIN Import pour la boite de dialogue --%>
 </head>
 <body>

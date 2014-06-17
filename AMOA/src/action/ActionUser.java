@@ -8,9 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import metier.User;
 
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.actions.MappingDispatchAction;
 
 import action.form.BeanFormAuth;
@@ -35,6 +37,13 @@ public class ActionUser extends MappingDispatchAction{
 			session.setAttribute("membre", membre);
 			session.setAttribute("login", membre.getUserName());
 			return mapping.findForward("welcome");
+		}
+		else{
+			ActionErrors errors = new ActionErrors();
+			errors.add("WrongUserName", new ActionMessage("username.or.password.wrong"));
+			
+			saveErrors(session, errors);
+			//return null;
 		}
 		
 		return mapping.findForward("faild");

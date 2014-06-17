@@ -95,6 +95,22 @@
 	</class>
 
 
+<!-- Classe: NOTIFICATION -->
+	<class name="Notification" table="notification" lazy="true">
+		<id name="id" type="integer" column="idNotification">
+			<generator class="native" />
+		</id>
+		
+		<property name="date" type="timestamp"/>
+		<property name="objet" type="string"/>
+		<property name="vue" type="boolean"/>	
+		
+		<many-to-one name="notifie" class="User" column="idPersonneNotifie" />
+		<many-to-one name="notifiant" class="User" column="idPersonneNotifiant" />			
+	</class>
+	
+	
+	
 <!-- Classe REPONSE -->	
 	<class name="Reponse" table="reponse" lazy="true">
 		<id name="reponseId" type="integer">
@@ -136,7 +152,9 @@
 		
 	</class>
 
-	<class name="User" table="user" lazy="true">
+
+<!-- Classe: USER -->
+<class name="User" table="user" lazy="true">
 		<id name="id" type="integer" column="id">
 			<generator class="increment" />
 		</id>
@@ -154,9 +172,16 @@
 			<key column="id" />
 			<one-to-many class="User" />
 		</set>
-
+		<set name="notifications" inverse="true" cascade="all" fetch="join"
+			lazy="false" where="vue = 0">
+			<key column="idPersonneNotifie" />
+			<one-to-many class="Notification" />
+		</set>
 	</class>
 	
+
+
+<!-- Classe: VOTE -->
 	<class name="Vote" table="vote" lazy="true">
 		<id name="id" type="integer" column="id">
 			<generator class="increment" />
@@ -166,7 +191,10 @@
 		<many-to-one name="auteur" class="User" column="userId"/>
 		<many-to-one name="demande" class="Demande" column="demandeId"/>
 	</class>
+
 	
+	
+<!-- Classe: AGREGAT -->	
 	<class name="Agregat" table="agregat" lazy="true">
 		<id name="id" type="integer" column="id">
 			<generator class="increment" />

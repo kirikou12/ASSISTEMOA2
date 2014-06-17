@@ -13,7 +13,7 @@ color: #fff;
 <%-- FIN Import pour le menu déroulant --%>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-  	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+  	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.form.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" media="screen" />

@@ -1,7 +1,6 @@
 package metier;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +15,7 @@ public class User implements Serializable {
 	private String password;
 	private Boolean admin;
 	private Set<User> amis = new HashSet<User>();
+	private Set<Notification> notifications = new HashSet<Notification>();
 
 	public User() {
 		this.id = 0;
@@ -145,6 +145,14 @@ public class User implements Serializable {
 
 	public void addAmi(User user1) {
 		this.amis.add(user1);		
+	}
+
+	public Set<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(Set<Notification> notifications) {
+		this.notifications = notifications;
 	}
 
 }

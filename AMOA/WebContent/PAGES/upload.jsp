@@ -5,9 +5,9 @@
 <head>
 
 	<link href="css/main.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="js/jquery-1.4.2.min.js" ></script>
-	<script type="text/javascript" src="js/dialogBox.js" ></script>
-	<script type="text/javascript" src="js/dropfile.js" ></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.11.1.min.js" ></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/myJQuery.js" ></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/dropfile.js" ></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Pièces jointes</title>

@@ -40,9 +40,9 @@
 	padding: 10px;
 }
 </style>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery.form.js"></script>		
-	<script type="text/javascript"	src="${pageContext.request.contextPath}/PAGES/js/dialogBox.js"></script>	
+	<script type="text/javascript"	src="${pageContext.request.contextPath}/PAGES/js/myJQuery.js"></script>	
 </head>
 <body>
 

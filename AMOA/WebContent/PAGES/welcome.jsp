@@ -17,7 +17,7 @@
   	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-ui-1.8.4.custom.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery.form.js"></script>    
-    <script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/dialogBox.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/myJQuery.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/PAGES/css/jquery-ui-1.8.4.custom.css" media="screen" />  
     
 </head>
@@ -26,9 +26,12 @@
    <logic:empty name="membre">
 		<tiles:insert attribute="header" />
 	</logic:empty>
-	<logic:notEmpty name="membre">
+	<logic:notEmpty name="membre">		
+			
 		
-			<bean:define id="membre" name="membre" scope="session" />
+			<bean:size id="notifs" name="membre" property="notifications"/>
+			Vous avez: <bean:write name="notifs"/> notification(s)!
+		
 				<ul id="menu">
 					<li><a href="#"><bean:write name="membre" property="firstNam" /></a>
 						<ul>

@@ -22,7 +22,7 @@ public class ActionTest extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		IDSBean bean = (IDSBean) form;
+		/*IDSBean bean = (IDSBean) form;
 		String[] ids = bean.getMembres().split(",");
 		ArrayList<String> list = new ArrayList<String>();
 		
@@ -38,6 +38,14 @@ public class ActionTest extends Action {
 		for (String string : list2) {
 			System.out.println(string.trim());
 		}
+		*/
+		IDSBean bean = (IDSBean) form;
+		String[] titres = bean.getTitres();
+		
+		for (String val : titres) {
+			System.out.println(val);
+		}
+		
 		
 		return null;
 	}

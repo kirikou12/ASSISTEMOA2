@@ -61,7 +61,7 @@
 </html:form>
 
 </body>
-<script type="text/javascript"	src="${pageContext.request.contextPath}/PAGES/js/dialogBox.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/PAGES/js/myJQuery.js"></script>
 
 
 <script>

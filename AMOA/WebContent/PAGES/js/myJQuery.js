@@ -1,6 +1,15 @@
 $(document).ready(function() {
 	
+	//Gestion de formulaire dynamique
 	
+		$('#addFeild').click(function(){
+			$('#divTest').append("<div> <input name='titres' type='text'/> <a href='#' class='close_box'>x</a>  </div>");
+		});	
+	   $('#divTest').on('click', '.close_box', function(){
+	       $(this).parent().remove();
+	   });
+	
+	//Gestion de formulaire dynamique: FIN
 
 	
 	//Gestion de vote

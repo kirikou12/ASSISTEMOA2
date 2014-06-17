@@ -84,10 +84,11 @@
     			type="org.springframework.web.struts.DelegatingActionProxy"
     			parameter="authentification"
     			name="beanAuth"
-    			validate="true"
-    			input="index.jsp"
+    			validate="true"    			
+    			input="/index.jsp"
     			scope="request">
     		<forward name="welcome" path="/PAGES/welcome.jsp" redirect="true"></forward>
+    		<forward name="faild" path="/index.jsp" redirect="true"></forward>
     		<!-- redirect ="true" est indispensable, sinon le css de la page ne se charge pas, cela pourrait être utile pour résoudre ce probleme de css qd on utlise les tiles (à tester). 
     		Si à la fin de votre Action vous choisissez le <forward> de nom "jsp", Struts va vous renvoyer la page jsp.jsp, 
     		mais sans changer l'url http://monserveur/monapplication/monAction.do dans votre navigateur.
