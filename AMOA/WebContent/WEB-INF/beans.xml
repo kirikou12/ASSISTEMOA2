@@ -39,7 +39,13 @@
 	    </bean> 
  
 	
+<!-- USER -->	
+		<bean name="/creatQuestionnaire" class="action.ActionQuestionnaire">
+	            
+	    </bean>
 	    
+	
+	    	    
       
 <!-- DEMANDE -->    
 

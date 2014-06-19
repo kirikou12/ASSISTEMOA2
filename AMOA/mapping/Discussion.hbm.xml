@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+
+    <!-- Classe: Discussion -->
+	<class name="Discussion" table="discussion" lazy="true">
+		<id name="id" type="integer" column="discussionId">
+			<generator class="native" />
+		</id>
+		
+		<one-to-one name="objet" class="Demande" fetch="join"/>
+		
+		<set name="comments" inverse="true" cascade="all" fetch="join"
+			lazy="true" order-by="date">
+			<key column="discussionId" />			
+			<one-to-many class="Comment" />			
+		</set>
+				
+	</class>
+
+
+</hibernate-mapping>

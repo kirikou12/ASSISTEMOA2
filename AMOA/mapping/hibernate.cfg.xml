@@ -14,8 +14,22 @@
 		<!-- fichiers de mapping 
 		<mapping resource="MappingDiscussion.hbm.xml" />
 		<mapping resource="MappingVote.hbm.xml" />	
-		-->
-		<mapping resource="MappingClasses.hbm.xml" />
+		-->		
+		<mapping resource="User.hbm.xml" />
+		<mapping resource="Demand.hbm.xml" />
+		<mapping resource="Comment.hbm.xml" />
+		<mapping resource="Notification.hbm.xml" />
+		<mapping resource="Group.hbm.xml" />
+		<mapping resource="Discussion.hbm.xml" />
+		<mapping resource="Aggregate.hbm.xml" />
+		<mapping resource="Vote.hbm.xml" />
+		<mapping resource="Response.hbm.xml" />
+		<mapping resource="File.hbm.xml" />
+		<mapping resource="Chapter.hbm.xml" />
+		<mapping resource="Manual.hbm.xml" />
+		<mapping resource="Reaction.hbm.xml" />
+		<mapping resource="Question.hbm.xml" />
+		<mapping resource="Avis.hbm.xml" />	
 						
 	</session-factory>
 </hibernate-configuration>

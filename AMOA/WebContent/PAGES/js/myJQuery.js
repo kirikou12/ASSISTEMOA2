@@ -1,9 +1,20 @@
 $(document).ready(function() {
 	
+	//Calendrier
+	$( "#datepicker" ).datepicker({
+		changeMonth: true,
+		changeYear: true, 
+		dateFormat: "mm/dd/yy"
+	});
+	
+	
+	//Gestion du Calendrier: FIN
+	
+	
 	//Gestion de formulaire dynamique
 	
 		$('#addFeild').click(function(){
-			$('#divTest').append("<div> <input name='titres' type='text'/> <a href='#' class='close_box'>x</a>  </div>");
+			$('#divTest').append("<div> <input name='propositions' type='text'/> <a href='#' class='close_box'>x</a>  </div>");
 		});	
 	   $('#divTest').on('click', '.close_box', function(){
 	       $(this).parent().remove();

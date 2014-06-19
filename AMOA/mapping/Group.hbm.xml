@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+    
+    <!-- Classe: GROUPE -->	
+	<class name="Groupe" table="groupe" lazy="true">
+		<id name="groupeId" type="integer" column="groupeId">
+			<generator class="increment" />
+		</id>
+
+		<property name="entitled" type="string" column="title" />
+		<property name="description" type="string" column="description" />
+
+		<many-to-one name="author" class="User" column="autheur" />
+
+		<set name="members" inverse="true" cascade="all" fetch="join"
+			lazy="true" table="groupe_member">
+			<key column="groupeId" />
+			<many-to-many class="User" column="id" />
+		</set>
+		
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+    
+    <!-- Classe REPONSE -->	
+	<class name="Reponse" table="reponse" lazy="true">
+		<id name="reponseId" type="integer">
+			<generator class="native" />
+		</id>
+		
+		<property name="date" type="timestamp"/>
+		<property name="content" type="string" column="content" />
+
+		<many-to-one name="author" class="User" column="author" 
+		     fetch="join" />
+		<many-to-one name="comment" class="Comment" column="commentId" 
+		     fetch="join" />
+		<set name="reponses" inverse="true" cascade="all" fetch="join"
+			lazy="false">
+			<key column="parentId" />			
+			<one-to-many class="Reponse"/>
+		</set>
+				
+	</class>
+
+</hibernate-mapping>

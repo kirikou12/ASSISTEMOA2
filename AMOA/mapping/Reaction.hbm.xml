@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+
+    <!-- Classe: REACTION -->
+	<class name="Reaction" table="reaction" lazy="true">
+		<id name="id" type="integer" column="reactionId">
+			<generator class="native" />
+		</id>
+		<many-to-one name="avis" class="Avis" column="avisId" fetch="join"/>
+		<many-to-one name="question" class="Question" column="questionId" fetch="join"/>
+		<many-to-one name="participant" class="participant" column="userId" fetch="join"/>		
+		
+		
+	</class>
+
+</hibernate-mapping>

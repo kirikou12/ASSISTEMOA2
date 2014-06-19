@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+
+    <!-- Classe: QUESTION -->
+	<class name="Question" table="question" lazy="true">
+		<id name="id" type="integer" column="questionId">
+			<generator class="native" />
+		</id>
+		
+		<property name="content" type="string"/>
+		<many-to-one name="sondage" class="Sondage" column="sondageId" fetch="join"/>		
+		<set name="choix" inverse="true" cascade="all" fetch="join"
+			lazy="false">
+			<key column="questionId" />
+			<one-to-many class="Choix" />
+		</set>
+		<set name="avis" inverse="true" cascade="all" fetch="join"
+			lazy="false">
+			<key column="questionId" />
+			<one-to-many class="Avis" />
+		</set>
+				
+	</class>
+
+</hibernate-mapping>

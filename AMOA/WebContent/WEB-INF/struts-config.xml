@@ -24,6 +24,7 @@
 		<form-bean name="beanChapitre" type="action.form.BeanFormChapitre" />
 		<form-bean name="beanDemande" type="action.form.DemandeBean" />			
 		<form-bean name="beanOffre" type="action.form.BeanFormOffre" />
+		<form-bean name="beanQuestionnaire" type="action.form.BeanFormQuestion" />	
 		<form-bean name="ids" type="action.form.IDSBean" />	
     </form-beans>
 
@@ -68,9 +69,20 @@
     			validate="true"
     			input="upload.jsp"
     			scope="request">
-    	</action> 
+    	</action>
+    	
+<!-- Actions qui concerncent le questionnaire -->
+
+		<action path="/creatQuestionnaire"
+            	type="org.springframework.web.struts.DelegatingActionProxy"
+            	parameter="create"
+    			name="beanQuestionnaire"
+    			validate="true"
+    			input="questionnaire.jsp"
+    			scope="request">            
+        </action>
         	
-<!-- Actions qui concernce le User (Gestion du compte...) -->
+<!-- Actions qui concerncent le User (Gestion du compte...) -->
     	<action path="/Sinscrire" 
     			type="org.springframework.web.struts.DelegatingActionProxy"
     			parameter="inscription"

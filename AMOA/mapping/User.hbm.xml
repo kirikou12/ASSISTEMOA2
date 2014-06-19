@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+	
+<!-- Classe: USER -->
+<class name="User" table="user" lazy="true">
+		<id name="id" type="integer" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="userName" type="string" column="username" />
+		<property name="firstNam" type="string" column="nom" />
+		<property name="lastName" type="string" column="prenom" />
+		<property name="email" type="string" column="email" />
+		<property name="password" type="string" column="password" />
+		<property name="admin" type="boolean" column="admin" />
+		
+		
+		<set name="amis" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="id" />
+			<one-to-many class="User" />
+		</set>
+		<set name="notifications" inverse="true" cascade="all" fetch="join"
+			lazy="false" where="vue = 0">
+			<key column="idPersonneNotifie" />
+			<one-to-many class="Notification" />
+		</set>
+	</class>
+	
+<!-- Les requêtes HQL -->
+
+	<sql-query name="userByName">
+		<return alias="user" class="metier.User" />
+		SELECT user.id AS {user.id},
+		user.nom AS {user.firstNam},
+		user.prenom AS {user.lastName},
+		user.email AS {user.email},
+		user.username AS {user.userName},
+		user.password AS {user.password},
+		user.admin AS {user.admin}
+		FROM user user WHERE user.username LIKE :userName
+	</sql-query>
+	
+</hibernate-mapping>

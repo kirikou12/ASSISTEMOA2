@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+    
+   <class name="Chapitre" table="chapitre" lazy="true">
+		<id name="id" type="integer" column="id">
+			<generator class="increment" />
+		</id>
+
+		<property name="titre" type="string"/>
+		<property name="numero" type="integer"/>
+		<many-to-one name="manuel" class="Manuel" column="idManuel"/>
+		<many-to-one name="aChapitre" class="Chapitre" column="chapitreParent"/>		
+	
+		<list name="sousChapitres"  cascade="all" fetch="join"
+			lazy="false" >
+	         <key column="chapitreParent"/>
+	         <list-index column="indx"/>
+	         <one-to-many class="Chapitre"/>
+      	</list>
+		
+	</class>
+
+</hibernate-mapping>

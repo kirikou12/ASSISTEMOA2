@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+
+    <class name="Demande" table="demande_redmine" lazy="false">
+		<id name="demandeId" type="integer" column="demandeId">
+			<generator class="native" />
+		</id>
+
+		<property name="projet" type="string"/>
+		<property name="sujet" type="string"/>
+		<property name="description" type="string"/>
+		<property name="tracker" type="string"/>
+		<property name="statut" type="string"/>
+		<property name="priorite" type="string"/>
+		<property name="criticite" type="string"/>
+		<property name="versionCible" type="string"/>
+		<property name="versionApplication" type="string"/>		
+		
+		<property name="demandeIdRMINE" type="integer"/>
+		<property name="tempsEstime" type="integer"/>
+		<property name="tempsVendu" type="integer"/>
+		
+		<property name="pourcentageRealise" type="double"/>
+		
+		<property name="echeance" type="timestamp"/>
+		<property name="cree" type="timestamp"/>
+		<property name="ferme" type="timestamp"/>
+		<property name="miseAJours" type="timestamp"/>
+		<property name="debut" type="timestamp"/>
+		
+
+		<many-to-one name="auteur" class="User" lazy="false"/>
+		<many-to-one name="assigneA" class="User"/>
+		<many-to-one name="agregat" class="Agregat"/>
+		
+		
+		<set name="votes" inverse="true" cascade="all" fetch="join"
+			lazy="false">
+			<key column="demandeId" />			
+			<one-to-many class="Vote" />
+			<!-- exemple : Hibernate Mapping ArrayList : http://www.tutorialspoint.com/hibernate/hibernate_list_mapping.htm -->
+		</set>
+		<set name="manuels" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="demandeId" />			
+			<many-to-many class="Manuel" column="id"/>
+		</set>
+		<set name="chapitres" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="demandeId" />			
+			<many-to-many class="Chapitre" column="id"/>
+		</set>
+		<set name="pieceJointes" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="idPost" />			
+			<one-to-many class="File"/>
+		</set>
+		
+	</class>	
+
+</hibernate-mapping>
