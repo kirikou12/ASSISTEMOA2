@@ -32,6 +32,7 @@
 				property="titre" />
 		</html:select><br>
 		<html:file property="files"></html:file><br>
+		<html:hidden property="groupeId" value="${groupeId}"/>
 		
 		<html:submit>Sauvegarder</html:submit>
 	</html:form>

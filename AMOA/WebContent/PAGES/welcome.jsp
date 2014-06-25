@@ -8,79 +8,102 @@
 <html>
 <head>
 
-<%-- Import pour le menu déroulant --%>
-<link href="${pageContext.request.contextPath}/PAGES/css/menuDeroulantStyle.css" rel="stylesheet" type="text/css" />
-<%-- FIN Import pour le menu déroulant --%>
+
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   	
-  	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-ui-1.8.4.custom.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery.form.js"></script>    
-    <script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/myJQuery.js"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/PAGES/css/jquery-ui-1.8.4.custom.css" media="screen" />  
+  	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/PAGES/css/notif/css.css" />	
+    <link rel='stylesheet prefetch' href='${pageContext.request.contextPath}/PAGES/css/notif/style.css'>
+    <script src="${pageContext.request.contextPath}/PAGES/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function () {
+    	  $(".notifs").click(function () {
+    	    	$(this).toggleClass("open");
+    	    	$("#notificationMenu").toggleClass("open");
+    	  });
+    	});
+    </script>
     
+    
+  	<title> <tiles:getAsString name="title"/></title>
 </head>
 <body>
-   
-   <logic:empty name="membre">
-		<tiles:insert attribute="header" />
-	</logic:empty>
-	<logic:notEmpty name="membre">		
-			
-		
-			<bean:size id="notifs" name="membre" property="notifications"/>
-			Vous avez: <bean:write name="notifs"/> notification(s)!
-		
-				<ul id="menu">
-					<li><a href="#"><bean:write name="membre" property="firstNam" /></a>
-						<ul>
-							<li><a href="">Mon profil</a></li>
-							<li><a href="">Mon compte</a></li>
-							<li><a href="${pageContext.request.contextPath}/PAGES/logout.jsp">Déconnexion</a></li>
-						</ul>
-					</li>
-					
-					<li><a href="#">
-							<html:link action="/demandesAffichageStandard.do">DEMANDES</html:link>
-							</a>
-						<ul>							
-							<li><a href="#">
-							<html:link action="/demandesTrieesParPeriorite.do">Demandes par priorité</html:link>	
-								</a></li>
-							<li><a href="${pageContext.request.contextPath}/PAGES/demandeForm.jsp">Créer demande</a></li>
-							<li><a href="${pageContext.request.contextPath}/afficherDiscussions.do">Discussions</a></li>
-						</ul>
-					</li>
-					
-					<li><a href="#">GROUPES</a>
-						<ul>
-							<li><a href="#">
-							<html:link action="/afficherGroupes.do">Groupes</html:link></a></li>
-							<li><a href="#">
-							<div class="mybox" url="${pageContext.request.contextPath}/PAGES/groupe.jsp" title="Nouveau groupe">Créer un groupe</div>
-							</a></li>
-							<li>
-								<a href="#">
-									<html:link action="/afficherAgregats.do">Agregats</html:link>	
-								</a>
-							</li>							
-						</ul>
-					</li>					
-										
-					
-													
-					<li>
-						<a href="#">
-							<html:link action="/afficherMembres.do">MEMBRES</html:link>	
-						</a>
-					</li>								
-				</ul>
-				
+ 
+<logic:notEmpty name="membre">		
 	
-	<div id="monid" title=""></div>
+<div class='fluid'>
+  <header class='header clearfix'>
+   		<tiles:insert attribute="top"/>   		
+  </header>
+  <div class='main'>
+    <div class='breadcrumbs'>
+		<ul id="breadcrumbs-one" class='last'>
+			<li><a href="#"><bean:write name="membre" property="firstNam" /></a></li>			
+			<li><a href="" class="current">Dashboard</a></li>
+		</ul>
+       <div class='clearfix'></div>
+    </div>
+  
+    <div class='content'>
+		<nav class='nav'>
+			<tiles:insert attribute="nav"/>
+		</nav>    
+		<div class='min'>
+			<tiles:insert attribute="content"/>
+		</div>
+    </div>
+    <div class='clearfix'></div>
+  </div>
+</div>
+
+	<ul id="notificationMenu" class="notifications">
+      <li class="titlebar">
+        <span class="title">Notifications</span>
+        <span class="settings"><i class="icon-cog"></i>
+        </span>
+      </li>
+      <div class="notifbox">
+      <!-- Une notification -->
+      <logic:iterate id="notif" name="membre" property="notifications"> 
+      		<logic:equal value="true" name="notif" property="vue">
+      			<li class=" notif">
+		          <a href="#">
+			            <div class="imageblock"><img src="https://si0.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png" class="notifimage"  />
+			            </div> 
+			            <div class="messageblock">
+				              <div class="message"><strong>${notif.objet}</strong>!</div>
+				
+				              <div class="messageinfo"><i class="icon-flag"></i>${notif.date}</div>
+			            </div>
+		          </a>
+	        </li>
+      		</logic:equal>  
+      		<logic:equal value="false" name="notif" property="vue">
+      			<li class=" notif unread">
+		          <a href="#">
+			            <div class="imageblock"><img src="https://si0.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png" class="notifimage"  />
+			            </div> 
+			            <div class="messageblock">
+				              <div class="message"><strong>${notif.objet}</strong>!</div>
+				
+				              <div class="messageinfo"><i class="icon-flag"></i>${notif.date}</div>
+			            </div>
+		          </a>
+	        	</li>      		
+      		</logic:equal>    
+	        
+        </logic:iterate> 
+        <!-- Fin notification -->     
+        
+      </div>
+      <li class="seeall">
+        <a>See All</a>
+      </li>
+    </ul>		
 		
-	</logic:notEmpty>
+</logic:notEmpty>
+	
+	
 
 </body>
 </html>

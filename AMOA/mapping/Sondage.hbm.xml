@@ -10,12 +10,10 @@
 		<property name="about" type="string" />
 		<property name="ouverture" type="timestamp" />
 		<property name="fin" type="timestamp" />
-		<list name="questions"  cascade="all" fetch="join"
-			lazy="false" >
+		<set name="questions"  cascade="all" fetch="join" lazy="false">
 	         <key column="sondageId"/>
-	         <list-index column="indx"/>
 	         <one-to-many class="Question"/>
-      	</list>
+      	</set>      	
 	</class>
 
 </hibernate-mapping>

@@ -12,8 +12,7 @@ public class BeanFormQuestion extends ActionForm {
 
 	private String question;
 	private String[] propositions;
-	private boolean multipleChoice;
-	private String date;
+	private boolean multipleChoice;	
 	
 	public BeanFormQuestion(){
 		
@@ -41,13 +40,5 @@ public class BeanFormQuestion extends ActionForm {
 
 	public void setMultipleChoice(boolean multipleChoice) {
 		this.multipleChoice = multipleChoice;
-	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
 	}
 }

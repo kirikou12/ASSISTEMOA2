@@ -5,7 +5,7 @@
     
     <!-- Classe: GROUPE -->	
 	<class name="Groupe" table="groupe" lazy="true">
-		<id name="groupeId" type="integer" column="groupeId">
+		<id name="id" type="integer" column="groupeId">
 			<generator class="increment" />
 		</id>
 
@@ -18,6 +18,11 @@
 			lazy="true" table="groupe_member">
 			<key column="groupeId" />
 			<many-to-many class="User" column="id" />
+		</set>
+		<set name="discussions" inverse="true" cascade="all" fetch="join"
+			lazy="true">
+			<key column="groupeId" />
+			<one-to-many class="Discussion"/>
 		</set>
 		
 	</class>

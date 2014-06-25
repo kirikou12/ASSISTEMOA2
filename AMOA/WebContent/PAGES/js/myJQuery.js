@@ -1,62 +1,11 @@
 $(document).ready(function() {
 	
-	//Calendrier
-	$( "#datepicker" ).datepicker({
-		changeMonth: true,
-		changeYear: true, 
-		dateFormat: "mm/dd/yy"
-	});
 	
 	
-	//Gestion du Calendrier: FIN
 	
 	
-	//Gestion de formulaire dynamique
-	
-		$('#addFeild').click(function(){
-			$('#divTest').append("<div> <input name='propositions' type='text'/> <a href='#' class='close_box'>x</a>  </div>");
-		});	
-	   $('#divTest').on('click', '.close_box', function(){
-	       $(this).parent().remove();
-	   });
-	
-	//Gestion de formulaire dynamique: FIN
 
-	
-	//Gestion de vote
-	$('.voter').click(function(){
-		var context = $(this).attr('context');
-		var demandeId = $(this).attr('idDemande');
-		var vote = $(this).attr('value');
-		$.ajax({
-			   type: "POST",
-			   url: context+"/voterDemande.do",
-			   data: "id="+demandeId+"&vote="+vote,
-			   success: function(msg){	
-				   if(msg != "")
-					   alert(msg);				   
-			   }
-			 });
 		
-		//$(this).off(); Désactiver un lien
-	});
-	//Gestion de vote: FIN
-	
-	//Gestion de suivi d'une demande
-	$('#suivreLink').click(function(){
-		var demandeId = $(this).attr('demandeId');
-		$.ajax({
-			   type: "POST",
-			   url: "/Cahier_de_charge/suivreDemande.do",
-			   data: "demandeId="+demandeId,
-			   success: function(msg){					  
-				  $("#suivreLink").hide();  			   
-			   }
-			 });
-		
-		//$(this).off(); Désactiver un lien
-	});
-	//Gestion de suivi d'une demande: FIN
 	
 	//Quick show demand
 	$('.dilog').click(function(){
@@ -80,25 +29,7 @@ $(document).ready(function() {
 	});
 	//Quick show demand: FIN
 	
-	//Gestion des commentaires
-	$("#submitComment").click(
-			function() {
-				$("#formComment").ajaxSubmit(
-						{
-							error : function() {
-								alert("Theres an error with AJAX");
-							},
-							beforeSubmit : function() {
-							},
-							success : function(e) {	
-								$('#formComment').reset();
-								$("#myComment").append(
-										"<div id=\"comment\">" + e + "</div>")
-										.hide().slideDown(600);								
-							}
-						});
-				
-			});
+	
 	
 	
 	/*
@@ -110,66 +41,9 @@ $(document).ready(function() {
 	//Gestion des commentaires: FIN
 	
 	
-	//Create a group 
-    $('.mybox').click(function(){
-      var monurl = $(this).attr('url');		      
-      var montitle = $(this).attr('title');
-      /*
-      I guess $('#dialog-confirm').attr("title", "Message"); doesn't work the second time because jQuery UI Dialog already made changes to the actual DOM. So changing the title attribute of the div doesn't do anything
-      */
-      $("#monid").load(monurl, function() {
-          $(this).dialog({
-        	 title: montitle,
-             height: 'auto',
-             width:'auto',
-             modal: true,
-             position: 'top',
-             overlay: {
-                     backgroundColor: '#000',
-                     opacity: 0.5
-             },
-             buttons: {
-                'Envoyer': function() {
-                    $("#myForm").ajaxSubmit({                                                             
-                           error: function(){ 
-                                   alert("theres an error with AJAX");
-                           },
-                           beforeSubmit: function(){
-                        	    $("#loader").show();
-                           },
-                           success: function(e){
-                        	   $("#loader").hide();
-						   		$("#rep").fadeIn(1100).html(e).fadeOut(900);
-                           }
-                    });
-                    $(this).dialog('close');
-                },
-                Cancel: function() {
-                        $(this).dialog('close');
-                }
-             }
-          });
-      });
-	});
-  //Create a group: FIN 
+	 
     
-    
-    //Mouseover/Mouseout une demande
-    $( "#contenuDemande" ).mouseover(function() {
-    	$("#modifier").show();
-    });
-    $( ".contenu" ).mouseout(function() {
-    	$("#modifier").hide();
-    });
-    
-    //Mouseover/Mouseout le pourcentage
-    $( "#pourcentage" ).mouseover(function() {
-    	$("#pourcent").show();
-    });
-    $( ".contenu" ).mouseout(function() {
-    	$("#pourcentage").hide();
-    });
-    
+   
     
     //Pour le menu déroulant
     sfHover = function() {
@@ -188,6 +62,6 @@ $(document).ready(function() {
 		window.attachEvent("onload", sfHover);
     
 	//Upload
-	$('.dropfile').dropfile();
+	//$('.dropfile').dropfile();
     
 });

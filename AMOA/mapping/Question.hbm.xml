@@ -10,6 +10,7 @@
 		</id>
 		
 		<property name="content" type="string"/>
+		<property name="multipleChoice" type="boolean"/>
 		<many-to-one name="sondage" class="Sondage" column="sondageId" fetch="join"/>		
 		<set name="choix" inverse="true" cascade="all" fetch="join"
 			lazy="false">

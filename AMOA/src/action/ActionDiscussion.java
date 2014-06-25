@@ -22,6 +22,14 @@ public class ActionDiscussion extends MappingDispatchAction {
 	DAODemande daoDemande;
 	DAODiscussion daoDiscussion;
 	
+	public ActionForward create(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+			
+			request.setAttribute("groupeId", request.getParameter("groupeId"));
+			
+		return mapping.findForward("succes");
+	}	
 	
 	public ActionForward afficherDiscussions(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)

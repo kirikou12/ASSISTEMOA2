@@ -1,29 +1,22 @@
+<%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean"%>
+
+<html>
 <style>
-#top p a {
-text-decoration: none;
-color: #fff;
-}
+
 </style>
 
-<%-- Import pour le menu déroulant --%>
-<link href="Cahier_de_charge/PAGES/css/menuDeroulantStyle.css" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript" src="/Cahier_de_charge/PAGES/js/menuDeroulantJquery.js"></script>
-
-<%-- FIN Import pour le menu déroulant --%>
-
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-  	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js"></script>
-    <script type="text/javascript" src="js/jquery.form.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.4.custom.css" media="screen" />
 
 <body>
-	<div id="top">
-		<p align="right">
-			| <a href="/auth.do">S'identifier</a> | <a
-				href="/Sinscrire.do">Créer un compte</a> |
-		<p>
-	</div>
+	<span class='logo'></span>	
+    <section class='top-nav last'>
+    	<bean:size id="notifs" name="membre" property="notifications"/>		
+        <li><a href='#'>Tasks</a></li>
+		<li><a href='#' >Messages<span class='rednum'>1</span></a></li>		
+        <li><a href="${pageContext.request.contextPath}/PAGES/logout.jsp">Déconnexion</a></li>		
+    </section>
+    <section class='notification'>
+      <li class='message' data-count='${notifs}'> <a href='#' class='notifs'>--</a></li>       
+    </section>
+	<div class='clearfix'></div>
 </body>
 </html>

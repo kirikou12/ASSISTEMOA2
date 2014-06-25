@@ -18,7 +18,7 @@
 		<logic:iterate id="groupe" name="groupes">
 			<tr>
 				<td><html:link page="/afficherGroupe.do" paramId="groupeId"
-						paramName="groupe" paramProperty="groupeId">
+						paramName="groupe" paramProperty="id">
 						<bean:write name="groupe" property="entitled" />
 					</html:link></td>
 				<td><bean:write name="groupe" property="description" /></td>

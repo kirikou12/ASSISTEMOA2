@@ -24,7 +24,10 @@
 		<form-bean name="beanChapitre" type="action.form.BeanFormChapitre" />
 		<form-bean name="beanDemande" type="action.form.DemandeBean" />			
 		<form-bean name="beanOffre" type="action.form.BeanFormOffre" />
-		<form-bean name="beanQuestionnaire" type="action.form.BeanFormQuestion" />	
+		<form-bean name="beanQuestion" type="action.form.BeanFormQuestion" />
+		<form-bean name="beanSondage" type="action.form.BeanFormSondage" />
+		<form-bean name="beanQuestionnaire" type="action.form.BeanFormQuestionnaire" />
+            
 		<form-bean name="ids" type="action.form.IDSBean" />	
     </form-beans>
 
@@ -48,6 +51,31 @@
 	
     <action-mappings>
         
+        <action path="/welcome" forward="welcome" />
+        
+        <action path="/discussions" forward="discussions" />
+        <action path="/discussion" forward="discussion" />
+        
+        <action path="/demandes" forward="demandes" />
+        <action path="/demandeForm" forward="demandeForm" />
+        <action path="/demandesTrieesParPriorite" forward="demandesTrieesParPriorite" />
+        
+        <action path="/agregat" forward="agregat" /> 
+        <action path="/agregatForm" forward="agregatForm" />               
+        <action path="/agregats" forward="agregats" />
+        
+        <action path="/questionnaire" forward="questionnaire" />
+        <action path="/questionnaireForm" forward="questionnaireForm" />
+        
+        <action path="/users" forward="users" />
+        
+        <action path="/listeGroupes" forward="listeGroupes" />
+        <action path="/groupe" forward="groupe" />
+        
+        
+        
+        
+        
         <action path="/test"
             	type="action.ActionTest"
     			name="ids"
@@ -59,7 +87,7 @@
     			type="action.ActionUploadMembres"
     			parameter="upload"
     			validate="true"
-    			input="upload.jsp"
+    			input="/PAGES/upload.jsp"
     			scope="request">
     	</action>
         
@@ -71,15 +99,42 @@
     			scope="request">
     	</action>
     	
-<!-- Actions qui concerncent le questionnaire -->
+<!-- Actions qui concerncent le sondage -->
 
-		<action path="/creatQuestionnaire"
+		<action path="/addQuestion"
+            	type="org.springframework.web.struts.DelegatingActionProxy"
+            	parameter="ajoutQuestion"
+    			name="beanQuestion"
+    			validate="true"
+    			input="/PAGES/questionnaire.jsp"
+    			scope="request">  
+    			<forward name="success" path="/questionnaire.do"></forward>          
+        </action>
+        
+		<action path="/createSondage"
             	type="org.springframework.web.struts.DelegatingActionProxy"
             	parameter="create"
-    			name="beanQuestionnaire"
+    			name="beanSondage"
     			validate="true"
-    			input="questionnaire.jsp"
-    			scope="request">            
+    			input="/PAGES/questionnaireForm.jsp"
+    			scope="request">   
+    			<forward name="success" path="/questionnaireForm.do"></forward>          
+        </action>
+        
+		<action path="/showSondage"
+            	type="org.springframework.web.struts.DelegatingActionProxy"
+            	parameter="show"
+    			validate="true"
+    			scope="request">   
+    			<forward name="success" path="/questionnaire.do"></forward>          
+        </action>
+        
+		<action path="/sonder"
+            	type="org.springframework.web.struts.DelegatingActionProxy"
+            	parameter="sonder"
+            	name="beanQuestionnaire"
+    			validate="true"
+    			scope="request">          
         </action>
         	
 <!-- Actions qui concerncent le User (Gestion du compte...) -->
@@ -90,7 +145,7 @@
     			validate="true"
     			input="index.jsp"
     			scope="request">
-    		<forward name="welcome" path="/PAGES/welcome.jsp" redirect="true"></forward>
+    		<forward name="welcome" path="/welcome.do" redirect="true"></forward>
     	</action>    	
     	<action path="/auth" 
     			type="org.springframework.web.struts.DelegatingActionProxy"
@@ -99,7 +154,7 @@
     			validate="true"    			
     			input="/index.jsp"
     			scope="request">
-    		<forward name="welcome" path="/PAGES/welcome.jsp" redirect="true"></forward>
+    		<forward name="welcome" path="/welcome.do" redirect="true"></forward>
     		<forward name="faild" path="/index.jsp" redirect="true"></forward>
     		<!-- redirect ="true" est indispensable, sinon le css de la page ne se charge pas, cela pourrait être utile pour résoudre ce probleme de css qd on utlise les tiles (à tester). 
     		Si à la fin de votre Action vous choisissez le <forward> de nom "jsp", Struts va vous renvoyer la page jsp.jsp, 
@@ -113,7 +168,7 @@
     			validate="true"
     			input="index.jsp"
     			scope="request">
-    		<forward name="succes" path="/PAGES/users.jsp" redirect="true"></forward>
+    		<forward name="succes" path="/users.do" redirect="true"></forward>
     	</action>
     	<action path="/chargerMembres" 
     			type="org.springframework.web.struts.DelegatingActionProxy"
@@ -122,7 +177,8 @@
     			scope="request">
     	</action>	
     	
-    		
+    	
+    	  
     	
 <!-- Actions qui concernce une demande -->
     	<action path="/creerDemande" 
@@ -133,7 +189,7 @@
     			name="beanDemande"
     			scope="request">
     			<!-- le redirect=true m'a posé un probleme au niveau de l'affichage des demandes de la rêq http-->
-    		<forward name="succes" path="/PAGES/commentaire.jsp" />    		
+    		<forward name="succes" path="/discussion.do" />    		
     	</action>    	
     	<action path="/demandesAffichageStandard" 
     			type="org.springframework.web.struts.DelegatingActionProxy" 
@@ -142,16 +198,8 @@
     			input="/PAGES/welcome.jsp"
     			scope="request">
     			<!-- le redirect=true m'a posé un probleme au niveau de l'affichage des demandes de la rêq http-->
-    		<forward name="listeDemande" path="/PAGES/demandes.jsp" />    		
-    	</action>
-    	<action path="/afficherDemande" 
-    			type="org.springframework.web.struts.DelegatingActionProxy" 
-    			parameter="affichage"  			
-    			validate="true"
-    			input="/PAGES/demandes.jsp"
-    			scope="request">
-    		<forward name="showComments" path="/PAGES/commentaire.jsp"/>    		
-    	</action>
+    		<forward name="listeDemande" path="/demandes.do" />    		
+    	</action>    	
     	<action path="/modifierDemande"
     	    	type="org.springframework.web.struts.DelegatingActionProxy"
     	    	parameter="affichage2"
@@ -179,7 +227,7 @@
     			name="beanEnregDemande"
     			input="/PAGES/detailsDemande.jsp"
     			scope="request"> 
-    			<forward name="success" path="/PAGES/demandes.jsp" redirect="true"/>
+    			<forward name="success" path="/demandes.do" redirect="true"/>
     	</action>
     	<action path="/demandesTrieesParPeriorite"
     	    	type="org.springframework.web.struts.DelegatingActionProxy" 
@@ -187,7 +235,7 @@
     			validate="true"
     			input="/PAGES/welcome.jsp"
     			scope="request"> 
-    			<forward name="success" path="/PAGES/demandesTrieesParPriorite.jsp"/>
+    			<forward name="success" path="/demandesTrieesParPriorite.do"/>
     	</action>  
     	  	
     	
@@ -200,7 +248,7 @@
     			validate="true"
     			input="/PAGES/welcome.jsp"
     			scope="request">
-    		<forward name="success" path="/PAGES/agregat.jsp"/>    		
+    		<forward name="success" path="/agregat.do"/>    		
     	</action>
     	<action path="/afficherAgregats" 
     	    	type="org.springframework.web.struts.DelegatingActionProxy" 
@@ -208,7 +256,7 @@
     			validate="true"
     			input="/PAGES/welcome.jsp"
     			scope="request">
-    		<forward name="listeAgregat" path="/PAGES/garegats.jsp"/>    		
+    		<forward name="listeAgregat" path="/agregats.do"/>    		
     	</action>
     	<action path="/fusionnerDemandesSelectionees" 
     			type="org.springframework.web.struts.DelegatingActionProxy" 
@@ -217,7 +265,7 @@
     			name="beanIds"
     			input="/PAGES/demandes.jsp"
     			scope="request">   
-    			<forward name="fusion2" path="/PAGES/agregat_form.jsp" redirect="true"/>		
+    			<forward name="fusion2" path="/agregatForm.do" redirect="true"/>		
     	</action>
     	<action path="/regrouper"
     	    	type="org.springframework.web.struts.DelegatingActionProxy" 
@@ -226,7 +274,7 @@
     			name="beanAgregat"
     			input="/PAGES/demandes.jsp"
     			scope="request">   
-    			<forward name="success" path="/PAGES/agregat.jsp" redirect="true"/>
+    			<forward name="success" path="/agregat.do" redirect="true"/>
     	</action>  
     	
     	
@@ -245,7 +293,7 @@
     			validate="true"
     			input="/PAGES/welcome.jsp"
     			scope="request">
-    		<forward name="listeGroupe" path="/PAGES/listeGroupes.jsp" redirect="true"/>    		
+    		<forward name="listeGroupe" path="/listeGroupes.do" redirect="true"/>    		
     	</action>
     	<action path="/afficherGroupe" 
     			type="org.springframework.web.struts.DelegatingActionProxy" 
@@ -253,7 +301,7 @@
     			validate="true"
     			input="/PAGES/welcome.jsp"
     			scope="request">
-    		<forward name="SUCCESS" path="/PAGES/groupe.jsp" redirect="true"/>    		
+    		<forward name="SUCCESS" path="/groupe.do" redirect="true"/>    		
     	</action>
     	<action path="/inviterMembre" 
     			type="org.springframework.web.struts.DelegatingActionProxy" 
@@ -262,7 +310,7 @@
     			name="beanIds"
     			input="/PAGES/groupe.jsp"
     			scope="request">
-    		<forward name="SUCCESS" path="/PAGES/groupe.jsp" redirect="true"/>    		
+    		<forward name="SUCCESS" path="/groupe.do" redirect="true"/>    		
     	</action>
     	
     			   	
@@ -284,7 +332,7 @@
     			validate="true"
     			input="/PAGES/commentaire.jsp"
     			scope="request">
-    		<forward name="discussions" path="/PAGES/discussions.jsp" redirect="true"/> 
+    		<forward name="discussions" path="/discussions.do" redirect="true"/> 
     	</action>
     	
     	<action path="/afficherDiscussion" 
@@ -293,9 +341,16 @@
     			validate="true"
     			input="/PAGES/commentaire.jsp"
     			scope="request">
-    		<forward name="discussion" path="/PAGES/discussion.jsp" redirect="true"/> 
+    		<forward name="discussion" path="/discussion.do" redirect="true"/> 
     	</action>
-    	
+    	<action path="/creerDiscussion" 
+    			type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="create"   			
+    			validate="true"
+    			input="/PAGES/groupe.jsp"
+    			scope="request">
+    		<forward name="succes" path="/demandeForm.do" />    		
+    	</action>
     	
     	
 <!--Le sactions qui concernent un chapitre -->
@@ -327,7 +382,10 @@
 
     <message-resources parameter="MessageResources" />
 
-	
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+		<set-property property="moduleAware" value="true" />
+	</plug-in>
 
 	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
         <set-property property="contextConfigLocation"

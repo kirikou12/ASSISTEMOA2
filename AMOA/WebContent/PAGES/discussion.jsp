@@ -9,31 +9,95 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/PAGES/css/cssDemande.css"  type="text/css"/>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.11.1.min.js"></script>
 
 <!-- Text editor includes-->
-
-<link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.css">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js" charset="utf-8"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.min.js"
-	charset="utf-8"></script>
-
-
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.css">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 <!-- Fin Text editor includes -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/PAGES/js/myJQuery.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/PAGES/js/jquery.form.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/PAGES/css/cssDemande.css" />
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			//Gestion de vote
+			$('.voter').click(function(){
+				var context = $(this).attr('context');
+				var demandeId = $(this).attr('idDemande');
+				var vote = $(this).attr('value');
+				$.ajax({
+					   type: "POST",
+					   url: context+"/voterDemande.do",
+					   data: "id="+demandeId+"&vote="+vote,
+					   success: function(msg){	
+						   if(msg != "")
+							   alert(msg);				   
+					   }
+					 });
+				
+				//$(this).off(); Désactiver un lien
+			});
+			//Gestion de vote: FIN
+
+		
+			//Gestion des commentaires
+			$("#submitComment").click(
+					function() {
+						$("#formComment").ajaxSubmit(
+								{
+									error : function() {
+										alert("Theres an error with AJAX");
+									},
+									beforeSubmit : function() {
+									},
+									success : function(e) {	
+										$('#formComment').reset();
+										$("#myComment").append(
+												"<div id=\"comment\">" + e + "</div>")
+												.hide().slideDown(600);								
+									}
+								});
+						
+			});
+			
+			//Gestion de suivi d'une demande
+			$('#suivreLink').click(function(){
+				var demandeId = $(this).attr('demandeId');
+				$.ajax({
+					   type: "POST",
+					   url: "/Cahier_de_charge/suivreDemande.do",
+					   data: "demandeId="+demandeId,
+					   success: function(msg){					  
+						  $("#suivreLink").hide();  			   
+					   }
+					 });
+				
+				//$(this).off(); Désactiver un lien
+			});
+			//Gestion de suivi d'une demande: FIN
+	    
+	    
+		    //Mouseover/Mouseout une demande
+		    $( "#contenuDemande" ).mouseover(function() {
+		    	$("#modifier").show();
+		    });
+		    $( ".contenu" ).mouseout(function() {
+		    	$("#modifier").hide();
+		    });
+		    
+		    //Mouseover/Mouseout le pourcentage
+		    $( "#pourcentage" ).mouseover(function() {
+		    	$("#pourcent").show();
+		    });
+		    $( ".contenu" ).mouseout(function() {
+		    	$("#pourcentage").hide();
+		    });
+		
+		});		
+	</script>
 
 </head>
 <body>
-<jsp:include page="welcome.jsp"/>
-<br><br><br><br><br>
-
 	<div class="demande">
 	<bean:define id="demande" name="discussion" property="objet"></bean:define>
 		<div class="titre">
@@ -65,6 +129,7 @@
 				idDemande="${demande.demandeId}"
 				context="${pageContext.request.contextPath}"> <img alt="ko"
 				src="${pageContext.request.contextPath}/PAGES/images/ok.PNG">
+			
 			</a> <a href="#" class="voter" value="Contre"
 				idDemande="${demande.demandeId}"
 				context="${pageContext.request.contextPath}"> <img alt="ko"
@@ -105,8 +170,9 @@
 		<label for="textarea" id="labelTextarea">Ecrire une
 			commentaire:</label>
 		<br>
-		<html:textarea property="comment" styleId="commentTextarea"
-			styleClass="jqte-test"></html:textarea>
+		<textarea name="comment" rows="4" cols="50" id="commentTextarea" class="jqte-test"> </textarea>
+		<!-- <html:textarea property="comment" styleId="commentTextarea"
+			styleClass="jqte-test"></html:textarea> -->		
 	</html:form>
 	<input type="submit" name="submit" id="submitComment" />
 
@@ -123,10 +189,12 @@
 			})
 		});
 	</script>
-	<input type="text"  id="d" value="Some text"/>
+	
+	
+	
 	<script>
-		$( "#d" ).select(function() {
-			alert("gggg:"+getSelectedText());
+		$( "#commentTextarea" ).select(function() {
+			alert("seletcted text:"+getSelectedText());
 		});
 		
 		function getSelectedText() {

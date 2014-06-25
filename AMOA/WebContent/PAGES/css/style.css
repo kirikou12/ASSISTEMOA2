@@ -67,7 +67,7 @@ a.back{
 }
 .form_wrapper h3{
 	padding:20px 30px 20px 30px;
-	background-color:#444;
+	background-color: #69D2E7;
 	color:#fff;
 	font-size:25px;
 	border-bottom:1px solid #ddd;
@@ -139,7 +139,7 @@ form.forgot_password{
 	background:#feffef;
 }
 .form_wrapper .bottom{
-	background-color:#444;
+	background-color: #69D2E7;
 	border-top:1px solid #ddd;
 	margin-top:20px;
 	clear:both;
@@ -147,11 +147,12 @@ form.forgot_password{
 	text-shadow:1px 1px 1px #000;
 }
 .form_wrapper .bottom a{
+	font-size: 0.99em;
 	display:block;
 	clear:both;
 	padding:10px 30px;
 	text-align:right;
-	color:#ffa800;
+	color: white;
 	text-shadow:1px 1px 1px #000;
 }
 .form_wrapper a.forgot{

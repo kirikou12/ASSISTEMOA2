@@ -7,12 +7,13 @@ public class DemandeBean extends ActionForm {
 
 	private static final long serialVersionUID = 7834449682174996418L;
 
-	String description;
-	String sujet;
-	String chapitre;
-	String projet;
-	String tracker;
-	String statut;
+	private String description;
+	private String sujet;
+	private String chapitre;
+	private String projet;
+	private String tracker;
+	private String statut;
+	private String groupeId;
 	private FormFile files;
 	
 	public DemandeBean(){
@@ -73,6 +74,14 @@ public class DemandeBean extends ActionForm {
 
 	public void setFiles(FormFile files) {
 		this.files = files;
+	}
+
+	public String getGroupeId() {
+		return groupeId;
+	}
+
+	public void setGroupeId(String groupeId) {
+		this.groupeId = groupeId;
 	}
 	
 }

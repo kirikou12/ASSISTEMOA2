@@ -23,7 +23,7 @@
 			<one-to-many class="User" />
 		</set>
 		<set name="notifications" inverse="true" cascade="all" fetch="join"
-			lazy="false" where="vue = 0">
+			lazy="false" where="vue = 0" order-by="date">
 			<key column="idPersonneNotifie" />
 			<one-to-many class="Notification" />
 		</set>

@@ -8,9 +8,9 @@
 		<id name="id" type="integer" column="reactionId">
 			<generator class="native" />
 		</id>
-		<many-to-one name="avis" class="Avis" column="avisId" fetch="join"/>
+		<many-to-one name="choix" class="Choix" column="choixId" fetch="join"/>
 		<many-to-one name="question" class="Question" column="questionId" fetch="join"/>
-		<many-to-one name="participant" class="participant" column="userId" fetch="join"/>		
+		<many-to-one name="participant" class="User" column="userId" fetch="join"/>		
 		
 		
 	</class>

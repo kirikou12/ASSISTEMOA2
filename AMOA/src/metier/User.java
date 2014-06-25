@@ -16,6 +16,7 @@ public class User implements Serializable {
 	private Boolean admin;
 	private Set<User> amis = new HashSet<User>();
 	private Set<Notification> notifications = new HashSet<Notification>();
+	
 
 	public User() {
 		this.id = 0;
@@ -26,6 +27,7 @@ public class User implements Serializable {
 		this.password = "";
 		this.admin = true;
 	}
+	
 
 	public User(String email, String firstNam, String lastName,
 			String password, Boolean website, String userName) {
@@ -77,6 +79,10 @@ public class User implements Serializable {
 		} else if (!lastName.equals(other.lastName))
 			return false;
 		return true;
+	}
+	
+	public int getNotificationSize(){
+		return this.notifications.size();
 	}
 
 	public String getFirstNam() {

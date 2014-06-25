@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import metier.Demande;
+import metier.Discussion;
 import metier.User;
 import metier.Vote;
 
@@ -22,6 +23,8 @@ import org.hibernate.Session;
 import action.form.BeanFormDemande;
 import action.form.DemandeBean;
 import dao.DAODemande;
+import dao.DAODiscussion;
+import dao.DAOGroupe;
 import dao.DAOUser;
 import dao.DAOVote;
 import dao.hibernate.DAOHBM;
@@ -31,6 +34,8 @@ public class ActionDemande extends MappingDispatchAction{
 	private DAODemande daoDemande;
 	private DAOVote daoVote;
 	private DAOUser daoUser;
+	private DAOGroupe daoGroupe;
+	private DAODiscussion daoDiscussion;
 	
 	public ActionForward create(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -53,10 +58,16 @@ public class ActionDemande extends MappingDispatchAction{
 		demande.setCriticite("néant");
 		demande.setVersionCible("1.1");
 		demande.setVersionApplication("1.0");
-		demande.setAssigneA(respo);
+		demande.setAssigneA(respo);		
 		
-		daoDemande.save(demande);
-		session.setAttribute("demande", demande);
+		demande = daoDemande.save(demande);
+		System.out.println(demande.getDemandeId());
+		
+		Discussion discussion = new Discussion();
+		discussion.setGroupe(daoGroupe.get(Integer.parseInt(request.getParameter("groupeId"))));
+		discussion.setObjet(demande);
+		daoDiscussion.save(discussion);
+		session.setAttribute("discussion", discussion);
 				
 		return mapping.findForward("succes");
 	} 
@@ -259,5 +270,21 @@ public class ActionDemande extends MappingDispatchAction{
 
 	public void setDaoUser(DAOUser daoUser) {
 		this.daoUser = daoUser;
+	}
+
+	public DAOGroupe getDaoGroupe() {
+		return daoGroupe;
+	}
+
+	public void setDaoGroupe(DAOGroupe daoGroupe) {
+		this.daoGroupe = daoGroupe;
+	}
+
+	public DAODiscussion getDaoDiscussion() {
+		return daoDiscussion;
+	}
+
+	public void setDaoDiscussion(DAODiscussion daoDiscussion) {
+		this.daoDiscussion = daoDiscussion;
 	}
 }

@@ -21,17 +21,18 @@ public class DAODemandeHBM implements DAODemande {
 	}
 	
 	@Override
-	public void save(Demande demande) throws Exception {
+	public Demande save(Demande demande) throws Exception {
 		Session	session = DAOHBM.getInstance().connect();
 		
 			if(demande.getDemandeIdRMINE() == -1)
-				session.save(demande);
+				demande = (Demande) session.save(demande);
 			else
-				session.merge(demande);
+				demande = (Demande) session.merge(demande);
 			//le merge a répondu à ce probleme cité là: 
 			//http://www.objis.com/formation-java/tutoriel-hibernate-3-comprendre-merge.html
 			
 		DAOHBM.getInstance().close(session);
+		return demande;
 	}
 
 	@Override

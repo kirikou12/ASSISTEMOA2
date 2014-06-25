@@ -4,13 +4,15 @@
 <hibernate-mapping package="metier">
 
     <!-- Classe: Discussion -->
-	<class name="Discussion" table="discussion" lazy="true">
-		<id name="id" type="integer" column="discussionId">
-			<generator class="native" />
+	<class name="Discussion" table="discussion" lazy="true">		
+		<id name="id" type="integer">
+			<column name="demandeId" />
+			<generator class="foreign">
+				<param name="property">objet</param>
+			</generator>
 		</id>
-		
-		<one-to-one name="objet" class="Demande" fetch="join"/>
-		
+		<one-to-one name="objet" class="Demande" constrained="true"/>
+		<many-to-one name="groupe" class="Groupe" fetch="join" column="groupeId"/>		
 		<set name="comments" inverse="true" cascade="all" fetch="join"
 			lazy="true" order-by="date">
 			<key column="discussionId" />			

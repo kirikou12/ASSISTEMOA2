@@ -1,7 +1,6 @@
 package metier;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +14,7 @@ public class Discussion implements Serializable {
 	private int id = -1;
 	private Demande objet; //Objet de la discussion
 	private Set<Comment> comments = new HashSet<Comment>();
+	private Groupe groupe;
 	
 	public Discussion(){}
 
@@ -40,5 +40,13 @@ public class Discussion implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Groupe getGroupe() {
+		return groupe;
+	}
+
+	public void setGroupe(Groupe groupe) {
+		this.groupe = groupe;
 	}	
 }

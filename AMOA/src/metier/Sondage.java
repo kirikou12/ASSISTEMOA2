@@ -2,7 +2,10 @@ package metier;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Sondage implements Serializable {
 
@@ -15,18 +18,22 @@ public class Sondage implements Serializable {
 	private String about;
 	private Timestamp ouverture;
 	private Timestamp fin;
-	private List<Question> questions;
+	private Set<Question> questions = new HashSet<Question>();
 	
 	public Sondage(){
 		
 	}
 
-	public List<Question> getQuestions() {
+	public Set<Question> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(List<Question> questions) {
+	public void setQuestions(Set<Question> questions) {
 		this.questions = questions;
+	}
+	
+	public void addQuestion(Question qt){
+		this.questions.add(qt);
 	}
 
 	public int getId() {

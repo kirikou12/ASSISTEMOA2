@@ -13,8 +13,41 @@
 	<bean id="DAOAgregat" class="dao.hibernate.DAOAgregatHBM"/>
 	<bean id="DAOOffre" class="dao.hibernate.DAOOffreHBM"/>
 	<bean id="DAODiscussion" class="dao.hibernate.DAODiscussionHBM"/>
+	<bean id="DAOSondage" class="dao.hibernate.DAOSondageHBM"/>
+	<bean id="DAOQuestion" class="dao.hibernate.DAOQuestionHBM"/>
+	<bean id="DAOChoix" class="dao.hibernate.DAOChoixHBM"/>
+	<bean id="DAOAvis" class="dao.hibernate.DAOAvisHBM"/>
+	<bean id="DAOReaction" class="dao.hibernate.DAOReactionHBM"/>
 		
+
 	
+	
+<!-- Sondage -->	
+		<bean name="/addQuestion" class="action.ActionSondage">
+	        <property name="daoQuestion">
+	            <ref bean="DAOQuestion"/>
+	        </property>
+	        <property name="daoChoix">
+	            <ref bean="DAOChoix"/>
+	        </property>
+	    </bean>
+	    <bean name="/createSondage" class="action.ActionSondage">
+	        <property name="daoSondage">
+	            <ref bean="DAOSondage"/>
+	        </property>  
+	    </bean>
+	    <bean name="/sonder" class="action.ActionSondage">
+	          <property name="daoReaction">
+	            <ref bean="DAOReaction"/>
+	        </property>  
+	    </bean>
+	    <bean name="/showSondage" class="action.ActionSondage">
+	        <property name="daoSondage">
+	            <ref bean="DAOSondage"/>
+	        </property>
+	    </bean>
+		
+		
 	
 <!-- USER -->	
 		<bean name="/Sinscrire" class="action.ActionUser">
@@ -37,13 +70,9 @@
 	            <ref bean="DAOUser"/>
 	        </property>
 	    </bean> 
- 
 	
-<!-- USER -->	
-		<bean name="/creatQuestionnaire" class="action.ActionQuestionnaire">
-	            
-	    </bean>
-	    
+		
+	    	    
 	
 	    	    
       
@@ -55,13 +84,14 @@
 	        </property>
 	        <property name="daoUser">
 	            <ref bean="DAOUser"/>
-	        </property>        
-	    </bean>
-	    <bean name="/afficherDemande" class="action.ActionDemande">
-	        <property name="daoDemande">
-	            <ref bean="DAODemande"/>
+	        </property> 
+	        <property name="daoGroupe">
+	            <ref bean="DAOGroupe"/>
 	        </property>
-	    </bean>
+	        <property name="daoDiscussion">
+	            <ref bean="DAODiscussion"/>
+	        </property>        
+	    </bean>	    
 	    <bean name="/modifierDemande" class="action.ActionDemande">
 	        <property name="daoDemande">
 	            <ref bean="DAODemande"/>
@@ -97,6 +127,11 @@
 	    </bean> 
     
 	    
+	    
+	    
+	    
+	    
+	    
 <!-- Discussion -->  
 	    <bean name="/afficherDiscussions" class="action.ActionDiscussion">
 	        <property name="daoDiscussion">
@@ -108,7 +143,19 @@
 	        <property name="daoDiscussion">
 	            <ref bean="DAODiscussion"/>
 	        </property>
-	    </bean>	    
+	    </bean>	
+	    
+	    <bean name="/creerDiscussion" class="action.ActionDiscussion">
+	        <property name="daoDiscussion">
+	            <ref bean="DAODiscussion"/>
+	        </property>
+	    </bean>	
+	    
+	    
+	    
+	    
+	    
+	    
 	    
 <!-- AGREGAT -->  
   

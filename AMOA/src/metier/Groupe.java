@@ -10,18 +10,19 @@ public class Groupe implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2825089918499753416L;
-	private int groupeId = -1;
+	private int id = -1;
 	private String entitled;
 	private String description;
 	private Set <User> members = new HashSet<User>();
 	private User author;
+	private Set <Discussion> discussions = new HashSet<Discussion>();
 	
 	public Groupe(){
 		
 	}
 	
 	public Groupe(int id, String entitled, String descritption, User author, Set<User> members){
-		this.groupeId = id;
+		this.id = id;
 		this.entitled = entitled;
 		this.description = descritption;
 		this.author = author;
@@ -60,11 +61,19 @@ public class Groupe implements Serializable {
 		this.description = description;
 	}
 
-	public int getGroupeId() {
-		return groupeId;
+	public int getId() {
+		return id;
 	}
 
-	public void setGroupeId(int groupId) {
-		this.groupeId = groupId;
+	public void setId(int groupId) {
+		this.id = groupId;
+	}
+
+	public Set <Discussion> getDiscussions() {
+		return discussions;
+	}
+
+	public void setDiscussions(Set <Discussion> discussions) {
+		this.discussions = discussions;
 	}
 }

@@ -20,8 +20,7 @@ public class ActionQuestionnaire extends MappingDispatchAction {
 		BeanFormQuestion beanQt = (BeanFormQuestion) form;
 		System.out.println(beanQt.getQuestion());
 		System.out.println(beanQt.getMultipleChoice());
-		System.out.println(beanQt.getDate());
-		
+				
 		String[] propositions = beanQt.getPropositions();
 		
 		for (String val : propositions) {

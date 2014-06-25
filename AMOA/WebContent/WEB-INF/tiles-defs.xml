@@ -7,25 +7,100 @@
 <tiles-definitions>
 
 
-	<definition name="accueil" page="/PAGES/welcome.jsp">
+	<definition name="welcome" page="/PAGES/welcome.jsp">
 		<put name="title" type="string" value="Page d'accueil" />		
-		<put name="header" value="/PAGES/top.jsp"/>	
-		<put name="article" value="/PAGES/vide.jsp" />
-		<put name="aside" value="/PAGES/vide.jsp"  />	
-		
+		<put name="top" value="/PAGES/top.jsp"/>
+		<put name="content" value="/PAGES/content.jsp"/>
+		<put name="nav" value="/PAGES/nav.jsp"  />		
 	</definition>
+	
+	
+	
+	
 
-	<definition name="commenter" extends="welcome">
-		<put name="title" type="string" value="Poster un commentaire" />
-		<put name="article" value="/PAGES/commentaire.jsp" />
-		<put name="aside" value="/PAGES/vide.jsp" />
+	<definition name="discussions" extends="welcome">
+		<put name="title" type="string" value="Liste des discussion" />
+		<put name="content" value="/PAGES/discussions.jsp" />
+	</definition>	
+	
+	<definition name="discussion" extends="welcome">
+		<put name="title" type="string" value="Détails de la discussion" />
+		<put name="content" value="/PAGES/discussion.jsp" />
 	</definition>
 	
 	
-	<definition name="listerDemandes" extends="welcome">
-		<put name="title" type="string" value="Liste des demandes" />
-		<put name="article" value="/PAGES/listeDemandes.jsp" />
-		<put name="aside" value="/PAGES/vide.jsp" />
+	
+	
+	
+		
+	<definition name="demandes" extends="welcome">
+		<put name="title" type="string" value="List des demande" />
+		<put name="content" value="/PAGES/demandes.jsp" />
+	</definition>
+	
+	<definition name="demandesTrieesParPriorite" extends="welcome">
+		<put name="title" type="string" value="Demandes triées par ordre prioritaire" />
+		<put name="content" value="/PAGES/demandesTrieesParPriorite.jsp" />
+	</definition>
+	
+	<definition name="demandeForm" extends="welcome">
+		<put name="title" type="string" value="Formulaire d'une demande" />
+		<put name="content" value="/PAGES/demandeForm.jsp" />
+	</definition>
+	
+	
+	
+	
+	
+	
+	<definition name="agregat" extends="welcome">
+		<put name="title" type="string" value="Agragat" />
+		<put name="content" value="/PAGES/agregat.jsp" />
+	</definition>
+	<definition name="agregats" extends="welcome">
+		<put name="title" type="string" value="Les agragats" />
+		<put name="content" value="/PAGES/agregats.jsp" />
+	</definition>
+	<definition name="agregatForm" extends="welcome">
+		<put name="title" type="string" value="Formulaire d'un agregat" />
+		<put name="content" value="/PAGES/agregatForm.jsp" />
+	</definition>
+	
+	
+		
+	
+	
+	<definition name="questionnaire" extends="welcome">
+		<put name="title" type="string" value="Sondage" />
+		<put name="content" value="/PAGES/questionnaire.jsp" />
+	</definition>
+	
+	<definition name="questionnaireForm" extends="welcome">
+		<put name="title" type="string" value="Sondage" />
+		<put name="content" value="/PAGES/questionnaireForm.jsp" />
+	</definition>
+	
+	
+	
+	
+	
+	<definition name="users" extends="welcome">
+		<put name="title" type="string" value="Liste des membres" />
+		<put name="content" value="/PAGES/users.jsp" />
+	</definition>
+	
+	
+	
+	
+	
+	<definition name="listeGroupes" extends="welcome">
+		<put name="title" type="string" value="Liste des groupes" />
+		<put name="content" value="/PAGES/listeGroupes.jsp" />
+	</definition>
+	
+	<definition name="groupe" extends="welcome">
+		<put name="title" type="string" value="Détailles d'un groupe" />
+		<put name="content" value="/PAGES/groupe.jsp" />
 	</definition>
 	
 
