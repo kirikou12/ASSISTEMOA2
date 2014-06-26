@@ -103,5 +103,12 @@
 		<put name="content" value="/PAGES/groupe.jsp" />
 	</definition>
 	
+	
+	
+	<definition name="offreForm" extends="welcome">
+		<put name="title" type="string" value="Détailles d'un groupe" />
+		<put name="content" value="/PAGES/offreForm.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

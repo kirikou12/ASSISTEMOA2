@@ -8,36 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title></title>
 
-<style type="text/css">
-#membres {
-	border: solid 1px black;
-	width: 199px;
-	margin-left: 700px;
-	margin-top: -400px;
-}
 
-#membresDuGroupe{
-	border: solid 1px black;
-}
-
-#membresDuGroupe, #membresAInviter {	
-	width: 199px;
-	//margin-top: -90%;
-	//margin-top: 30px;
-	//padding: 10px;
-}
-
-#comment, #groupe{	
-	border: solid 1px black;
-	margin-top: 30px;
-	padding: 10px;
-	width: 40%;
-}
-.titre{
-	background: rgb(0, 162, 232);
-	padding: 10px;
-}
-</style>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery.form.js"></script>		
 	
@@ -57,7 +28,16 @@
 	<br> ${groupe.description}</div>
 	<br>
 	
-<div id="nav">
+<div>
+	<logic:iterate id="discussion" name="groupe" property="discussions">		
+		<html:link page="/afficherDiscussion.do" paramId="discussionId"
+					paramName="discussion" paramProperty="id">
+					${discussion.objet.sujet }
+		</html:link>
+		<br>
+	</logic:iterate>
+</div>
+
 <div id="comment">
 	
 	<html:link action="/creerDiscussion.do" paramId="groupeId" paramName="groupe" paramProperty="id" styleId="formComment">
@@ -73,7 +53,8 @@
 				${membre.firstNam} <br>
 			</logic:iterate>
 	</div>
-</div>
+
+	<br>
 	<html:link action="/showSondage.do">Afficher sondage</html:link><br>
 
 	

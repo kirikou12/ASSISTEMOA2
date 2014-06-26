@@ -71,6 +71,8 @@
         
         <action path="/listeGroupes" forward="listeGroupes" />
         <action path="/groupe" forward="groupe" />
+                
+        <action path="/offreForm" forward="offreForm" />
         
         
         
@@ -321,7 +323,7 @@
     			type="action.ActionSaveComment"
     			name="beanComment"
     			validate="true"
-    			input="/PAGES/commentaire.jsp"
+    			input="/welcome.do"
     			scope="request">
     	</action>
     	

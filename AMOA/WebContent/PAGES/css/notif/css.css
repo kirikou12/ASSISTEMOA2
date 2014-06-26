@@ -53,10 +53,12 @@ section.notification li:nth-child(1) {
     background: url(../../images/sprites.png) no-repeat;
   background-position: 0 -64px;
 }
-section.notification li:after {
+
+
+.message:after  {
   content: attr(data-count);
   font-size: 13px;
-  background: #cc0001;
+  background: red;
   border-radius: 3px;
   color: #fff;
   z-index: 99999;
@@ -67,6 +69,12 @@ section.notification li:after {
   top: -12px;
   left: 7px;
 }
+.emptyMessage:after  {
+  	content: attr(data-count);
+   	padding: 4px 7px; 
+}
+
+
 .main {
 	height: auto;
 	min-height: 100%;

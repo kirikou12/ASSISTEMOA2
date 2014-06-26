@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/PAGES/css/cssDemande.css"  type="text/css"/>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/groupe/jquery.form.js"></script>
 
 <!-- Text editor includes-->
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.css">
@@ -46,7 +47,7 @@
 						$("#formComment").ajaxSubmit(
 								{
 									error : function() {
-										alert("Theres an error with AJAX");
+										alert("Il y a une erreur AJAX");
 									},
 									beforeSubmit : function() {
 									},
@@ -172,7 +173,8 @@
 		<br>
 		<textarea name="comment" rows="4" cols="50" id="commentTextarea" class="jqte-test"> </textarea>
 		<!-- <html:textarea property="comment" styleId="commentTextarea"
-			styleClass="jqte-test"></html:textarea> -->		
+			styleClass="jqte-test"></html:textarea> -->	
+			<html:hidden property="discussionId" value="${discussion.id}"/>	
 	</html:form>
 	<input type="submit" name="submit" id="submitComment" />
 
