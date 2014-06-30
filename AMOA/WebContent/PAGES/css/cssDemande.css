@@ -68,16 +68,37 @@ body{
 	//border: solid 1px black;
 	width: 500px;
 }
-.titreComment{
-	//border: solid 1px black;
-	width: 120px;
-	margin-left:-140px;
+
+/*START NEW MODIF*/
+.comment{	
+	margin: auto;
+	width: auto;
+	border-radius: 6px; 
+	padding-left: 50px; 
+ }
+ .titre{
+	font-size: 1.2em;
+	color: blue;
+	padding: 12px;
+ }
+.commentContent{
+	padding: 12px;	
+	border: solid 1px black;	
 }
-.comment, .titreComment{
-	padding: 5px;
-	display: inline-block;
-	vertical-align: top;
+.subComments{
+	//border-top: 1px blue solid;
+	width: 580px;
+	float:left;
 }
+.reduce{
+	font-size:1.4em;
+	color: black;
+	float:left;	
+	position: relative;
+	cursor: pointer;
+}
+/*END NEW MODIF*/
+
 #commentTextarea{
 	width: 492px;
 	border: solid 1px black;
@@ -89,4 +110,5 @@ body{
 }
 #formComment{
 	margin-top:20px;
+	width: 700px;
 }

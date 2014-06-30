@@ -17,9 +17,13 @@
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 <!-- Fin Text editor includes -->
-
-	<script type="text/javascript">
-		$(document).ready(function() {
+			
+			<script type="text/javascript">
+			$(document).ready(function(){
+				$('body').on('click', '.reduce', function(){ 
+				   $(this).siblings().andSelf().slideToggle('fast');
+			});				
+		
 			
 			//Gestion de vote
 			$('.voter').click(function(){
@@ -151,22 +155,26 @@
 
 	<div class="comments">
 		<logic:iterate id="commento" name="discussion" property="comments">
-			<div class="comment">
-				<div class="titreComment">
-					<strong><bean:write name="commento"
+			<div class='comment'>
+				<div class='titre'><strong><bean:write name="commento"
 							property="author.firstNam" /></strong><br>
-					<bean:write name="commento" property="date" />
-				</div>
-				<div class="contenu">
+					<bean:write name="commento" property="date" /></div>
+				<div class='commentContent'>
 					<bean:write name="commento" property="content" filter="false" />
 				</div>
-				
-				
-				<rec:write reponse="${commento.reponses}"></rec:write>
+				<logic:notEmpty name="commento" property="reponses">
+					<div class='subComments'>
+						<div class='reduce'>_</div>
+						<div class='reduce' style="display:none;">+</div>
+						<rec:write reponse="${commento.reponses}"/>					
+					</div>
+				</logic:notEmpty>
 			</div>
+
 		</logic:iterate>
 	</div>
 
+	<br>
 	<html:form action="/sauvegarderCommentaire.do" styleId="formComment">
 		<label for="textarea" id="labelTextarea">Ecrire une
 			commentaire:</label>
@@ -174,7 +182,7 @@
 		<textarea name="comment" rows="4" cols="50" id="commentTextarea" class="jqte-test"> </textarea>
 		<!-- <html:textarea property="comment" styleId="commentTextarea"
 			styleClass="jqte-test"></html:textarea> -->	
-			<html:hidden property="discussionId" value="${discussion.id}"/>	
+		<html:hidden property="discussionId" value="${discussion.id}"/>	
 	</html:form>
 	<input type="submit" name="submit" id="submitComment" />
 
