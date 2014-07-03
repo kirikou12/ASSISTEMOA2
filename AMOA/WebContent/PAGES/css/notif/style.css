@@ -1,7 +1,7 @@
 #notificationMenu {
   //width: 500px;
 	position: absolute;
-	left:850px;
+	left:70%;
   //padding: 20px;
 }
 
@@ -18,7 +18,7 @@
   content: '';
   display: block;
   height: 0;
-  left: 80px;
+  left: 50%;
   position: absolute;
   top: -20px;
   width: 0;
