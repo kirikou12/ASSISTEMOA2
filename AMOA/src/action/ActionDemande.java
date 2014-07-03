@@ -215,7 +215,7 @@ public class ActionDemande extends MappingDispatchAction{
 		Demande demande = this.daoDemande.get(Integer.parseInt(beanDemande.getDemandeId()));
 		demande.setDescription(beanDemande.getContent());
 		demande.setSujet(beanDemande.getTitle());
-		
+		this.daoDemande.save(demande);
 		return mapping.findForward("success");
 	}
 	

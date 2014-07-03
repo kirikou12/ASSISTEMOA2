@@ -21,14 +21,63 @@
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/panel/jquery.cookie.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/panel/jquery.persistentpanel.js"></script>
+
+	<style type="text/css">
+		
+		#membresDuGroupe{
+			border: 1px solid green;
+			//float: right;
+			width: 400px;
+			margin: 10px;
+			margin-top: 20px;
+		}
+		.membresAInviter{
+			border: 1px solid green;
+			//float: right;
+			width: 400px;	
+			margin: 10px;
+		}
+		
+		#discussionCreationLink, #showSurvey{				
+			background: DeepSkyBlue;
+			font-size: large;
+			text-decoration: none;
+			margin: 10px;
+		}
+		
+		
+		.groupe{
+			border: 1px solid red;
+			width: 400px;	
+			margin: 10px;		
+		}
+		.contentGroupe{
+		}
+		.titre{
+			//border: 1px solid red;
+			background: DeepSkyBlue;
+			width: 100%;
+			font-size: large;
+			color: black;
+		}
+		.dicussions{
+			border: 1px solid red;
+			width: 400px;
+			margin: 10px;				
+		}
+	</style>
 </head>
 <body>
 
-	<div id="groupe"><div class="titre">${groupe.entitled}</div>	
-	<br> ${groupe.description}</div>
+	<div class="groupe">
+		<div class="titre"> ${groupe.entitled} </div>
+		<div class="contentGroupe"> ${groupe.description} </div>	
+	</div>
+	
 	<br>
 	
-<div>
+<div class="dicussions">
+	<div class="titre"> Les discussions en cours</div>
 	<logic:iterate id="discussion" name="groupe" property="discussions">		
 		<html:link page="/afficherDiscussion.do" paramId="discussionId"
 					paramName="discussion" paramProperty="id">
@@ -38,14 +87,16 @@
 	</logic:iterate>
 </div>
 
-<div id="comment">
+<div id="createDiscussion">
 	
-	<html:link action="/creerDiscussion.do" paramId="groupeId" paramName="groupe" paramProperty="id" styleId="formComment">
-		<div class="titre">Créer une discussion</div>
+	<html:link action="/creerDiscussion.do" paramId="groupeId" paramName="groupe" paramProperty="id" styleId="discussionCreationLink">
+		Créer une discussion
 	</html:link>
 	
 </div>	
-
+		
+	<br>
+	<html:link action="/showSondage.do" styleId="showSurvey">Afficher sondage</html:link><br>
 	
 	<div id="membresDuGroupe">
 		<div class="titre">Les membres de ce groupe:</div>
@@ -55,19 +106,18 @@
 	</div>
 
 	<br>
-	<html:link action="/showSondage.do">Afficher sondage</html:link><br>
 
-	
 	<jsp:include page="/chargerMembres.do" />
-	
-	<html:form action="/inviterMembre.do" styleId="membres">
-		<div class="titre">Inviter des membres à rejoindre ce groupe: <div class="panelToggler" id="panelToggler"></div></div>		
-		<div id="membresAInviter">		
-			<logic:iterate id="membre" name="users">		
-				${membre.firstNam} 
-				<html:checkbox property="selectedIds" value="${membre.id}" />
-				<br>
-			</logic:iterate>
-			<html:submit>Inviter</html:submit>
-		</div>		
-	</html:form>	
+	<div class="membresAInviter">	
+		<html:form action="/inviterMembre.do" styleId="membres">
+			<div class="titre">Inviter des membres à rejoindre ce groupe: <div class="panelToggler" id="panelToggler"></div></div>		
+			<div id="membresAInviter">		
+				<logic:iterate id="membre" name="users">		
+					${membre.firstNam} 
+					<html:checkbox property="selectedIds" value="${membre.id}" />
+					<br>
+				</logic:iterate>
+				<html:submit>Inviter</html:submit>
+			</div>		
+		</html:form>
+	</div>	

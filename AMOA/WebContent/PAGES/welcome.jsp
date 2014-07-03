@@ -79,12 +79,12 @@
 	        </li>
       		</logic:equal>  
       		<logic:equal value="false" name="notif" property="vue">
-      			<li class=" notif unread">
+      			<li class="notif unread">
 		          <a href="#">
 			            <div class="imageblock"><img src="https://si0.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png" class="notifimage"  />
 			            </div> 
 			            <div class="messageblock">
-				              <div class="message"><strong>${notif.objet}</strong>!</div>
+				              <div class=""><strong>${notif.objet}</strong>!</div>
 				
 				              <div class="messageinfo"><i class="icon-flag"></i>${notif.date}</div>
 			            </div>

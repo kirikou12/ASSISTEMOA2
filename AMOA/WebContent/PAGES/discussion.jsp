@@ -55,11 +55,10 @@
 									},
 									beforeSubmit : function() {
 									},
-									success : function(e) {	
+									success: function(e) {	
 										$('#formComment').reset();
-										$("#myComment").append(
-												"<div id=\"comment\">" + e + "</div>")
-												.hide().slideDown(600);								
+										//$(".comments").append("<div class=\"comment\"> <div class=\'commentContent\'>" + e + "</div> </div>").hide().slideDown(600);
+																			
 									}
 								});
 						
@@ -119,7 +118,7 @@
 			</logic:equal>
 			<br>
 			<br>
-			<bean:write name="demande" property="description" />
+			<bean:write name="demande" property="description"  filter="false"/>
 		</div>
 		<br>
 		<div id="suivre">
@@ -196,7 +195,7 @@
 			jqteStatus = jqteStatus ? false : true;
 			$('.jqte-test').jqte({
 				"status" : jqteStatus
-			})
+			});
 		});
 	</script>
 	

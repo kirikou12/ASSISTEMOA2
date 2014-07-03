@@ -48,6 +48,12 @@
 		<put name="content" value="/PAGES/demandeForm.jsp" />
 	</definition>
 	
+	<definition name="modifDemandeForm" extends="welcome">
+		<put name="title" type="string" value="Formulaire d'une demande" />
+		<put name="content" value="/PAGES/demandeModifForm.jsp" />
+	</definition>
+	
+	
 	
 	
 	
