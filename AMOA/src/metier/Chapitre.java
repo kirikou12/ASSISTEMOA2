@@ -1,10 +1,7 @@
 package metier;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Chapitre implements Serializable {
 
@@ -16,6 +13,7 @@ public class Chapitre implements Serializable {
 	private int id = -1;
 	private Manuel manuel;
 	private String titre;
+	private String description;
 	private int numero;
 	private List sousChapitres;
 	private Chapitre aChapitre;
@@ -71,6 +69,14 @@ public class Chapitre implements Serializable {
 
 	public void setaChapitre(Chapitre aChapitre) {
 		this.aChapitre = aChapitre;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

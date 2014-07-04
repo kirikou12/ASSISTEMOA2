@@ -32,7 +32,8 @@
 		<mapping resource="Avis.hbm.xml" />	
 		<mapping resource="Choix.hbm.xml" />
 		<mapping resource="Sondage.hbm.xml" />
-		<mapping resource="Offre.hbm.xml" />	
+		<mapping resource="Offre.hbm.xml" />
+		<mapping resource="Projet.hbm.xml" />	
 						
 	</session-factory>
 </hibernate-configuration>

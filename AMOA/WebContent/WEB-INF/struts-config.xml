@@ -79,6 +79,14 @@
         
         
         
+        <action path="/showProjets"
+            	type="org.springframework.web.struts.DelegatingActionProxy"
+            	parameter="show"
+    			validate="true"
+    			input="/PAGES/content.jsp"
+    			scope="request">          
+        </action>
+        
         <action path="/test"
             	type="action.ActionTest"
     			name="ids"

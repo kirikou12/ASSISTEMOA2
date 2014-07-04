@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+							"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="metier">
+    
+   <class name="Projet" table="projet" lazy="true">
+		<id name="id" type="integer" column="idProjet">			
+			<generator class="foreign">
+				<param name="property">cahierDesCharges</param>
+			</generator>
+		</id>
+		<one-to-one name="cahierDesCharges" class="Manuel" constrained="true"/>
+		<property name="titre" type="string"/>
+		<property name="description" type="string"/>
+		<property name="lancement" type="timestamp"/>
+		
+	</class>
+
+</hibernate-mapping>

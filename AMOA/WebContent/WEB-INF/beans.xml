@@ -18,7 +18,17 @@
 	<bean id="DAOChoix" class="dao.hibernate.DAOChoixHBM"/>
 	<bean id="DAOAvis" class="dao.hibernate.DAOAvisHBM"/>
 	<bean id="DAOReaction" class="dao.hibernate.DAOReactionHBM"/>
+	<bean id="DAOProjet" class="dao.hibernate.DAOProjetHBM"/>
 		
+
+
+
+<!-- Projet -->	
+		<bean name="/showProjets" class="action.ActionProjet">
+	        <property name="daoProjet">
+	            <ref bean="DAOProjet"/>
+	        </property>
+	    </bean>
 
 	
 	

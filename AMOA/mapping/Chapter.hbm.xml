@@ -9,6 +9,7 @@
 		</id>
 
 		<property name="titre" type="string"/>
+		<property name="description" type="string"/>
 		<property name="numero" type="integer"/>
 		<many-to-one name="manuel" class="Manuel" column="idManuel"/>
 		<many-to-one name="aChapitre" class="Chapitre" column="chapitreParent"/>		
