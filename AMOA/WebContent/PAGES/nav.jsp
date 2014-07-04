@@ -69,6 +69,8 @@
 	<li><html:link action="/afficherGroupes.do">Groupes</html:link></li>
 	<li><html:link action="/afficherAgregats.do">Agregats</html:link></li>	
 	<li><html:link action="/afficherMembres.do">Membres</html:link></li>
+	<li><html:link action="/showSondage.do" >Afficher sondage</html:link></li>
+	<!-- C'est le div dans laquelle on affiche le formulaire de création d'un groupe -->
 	<div id="monid" title="Nouveau groupe"></div>
 </body>
 </html>

@@ -96,7 +96,7 @@
 </div>	
 		
 	<br>
-	<html:link action="/showSondage.do" styleId="showSurvey">Afficher sondage</html:link><br>
+	<br>
 	
 	<div id="membresDuGroupe">
 		<div class="titre">Les membres de ce groupe:</div>
