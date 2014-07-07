@@ -23,6 +23,10 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/js/panel/jquery.persistentpanel.js"></script>
 
 	<style type="text/css">
+	
+		body{
+			margin: auto;
+		}
 		
 		#membresDuGroupe{
 			border: 1px solid green;
@@ -47,8 +51,8 @@
 		
 		
 		.groupe{
-			border: 1px solid red;
-			width: 400px;	
+			//border: 1px solid red;
+			width: 800px;	
 			margin: 10px;		
 		}
 		.contentGroupe{
@@ -61,8 +65,8 @@
 			color: black;
 		}
 		.dicussions{
-			border: 1px solid red;
-			width: 400px;
+			//border: 1px solid red;
+			width: 800px;	
 			margin: 10px;				
 		}
 	</style>

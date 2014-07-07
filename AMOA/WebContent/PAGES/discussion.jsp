@@ -28,26 +28,31 @@
 			//Gestion de vote
 			$('.voter').click(function(){
 				var context = $(this).attr('context');
-				var demandeId = $(this).attr('idDemande');
+				var demandeId = $(this).attr('idDemande');				
+				
 				var vote = $(this).attr('value');
 				$.ajax({
 					   type: "POST",
 					   url: context+"/voterDemande.do",
 					   data: "id="+demandeId+"&vote="+vote,
-					   success: function(msg){	
-						   if(msg != "")
-							   alert(msg);				   
+					   success: function(msg){							   
+						   
 					   }
 					 });
+				$("#pourcent").load("/Cahier_de_charge/afficherDiscussion.do?discussionId=" + idDiscussion + " #pourcent");
 				
 				//$(this).off(); Désactiver un lien
 			});
 			//Gestion de vote: FIN
 
 		
+			jQuery.fn.reset = function () {
+			  $(this).each (function() { this.reset(); });
+			}
 			//Gestion des commentaires
 			$("#submitComment").click(
 					function() {
+						var idDiscussion = $(this).attr('idDiscussion');
 						$("#formComment").ajaxSubmit(
 								{
 									error : function() {
@@ -57,7 +62,8 @@
 									},
 									success: function(e) {	
 										$('#formComment').reset();
-										//$(".comments").append("<div class=\"comment\"> <div class=\'commentContent\'>" + e + "</div> </div>").hide().slideDown(600);
+										$("head").append("<link rel='stylesheet' href='/Cahier_de_charge/PAGES/css/cssDemande.css'  type='text/css'/>");
+										$(".comments").load("/Cahier_de_charge/afficherDiscussion.do?discussionId=" + idDiscussion + " .comments");
 																			
 									}
 								});
@@ -130,12 +136,12 @@
 		</div>
 		<div class="vote">
 			<a href="#" class="voter" value="Pour"
-				idDemande="${demande.demandeId}"
+				idDemande="${demande.demandeId}" idDiscussion="${discussion.id}"
 				context="${pageContext.request.contextPath}"> <img alt="ko"
 				src="${pageContext.request.contextPath}/PAGES/images/ok.PNG">
 			
 			</a> <a href="#" class="voter" value="Contre"
-				idDemande="${demande.demandeId}"
+				idDemande="${demande.demandeId}" idDiscussion="${discussion.id}"
 				context="${pageContext.request.contextPath}"> <img alt="ko"
 				src="${pageContext.request.contextPath}/PAGES/images/ko.PNG" id="ko">
 			</a>
@@ -183,7 +189,7 @@
 			styleClass="jqte-test"></html:textarea> -->	
 		<html:hidden property="discussionId" value="${discussion.id}"/>	
 	</html:form>
-	<input type="submit" name="submit" id="submitComment" />
+	<input type="submit" name="submit" id="submitComment" idDiscussion="${discussion.id}"/>
 
 
 	<script>
