@@ -18,93 +18,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 <!-- Fin Text editor includes -->
 			
-			<script type="text/javascript">
-			$(document).ready(function(){
-				$('body').on('click', '.reduce', function(){ 
-				   $(this).siblings().andSelf().slideToggle('fast');
-			});				
-		
 			
-			//Gestion de vote
-			$('.voter').click(function(){
-				var context = $(this).attr('context');
-				var demandeId = $(this).attr('idDemande');				
-				
-				var vote = $(this).attr('value');
-				$.ajax({
-					   type: "POST",
-					   url: context+"/voterDemande.do",
-					   data: "id="+demandeId+"&vote="+vote,
-					   success: function(msg){							   
-						   
-					   }
-					 });
-				$("#pourcent").load("/Cahier_de_charge/afficherDiscussion.do?discussionId=" + idDiscussion + " #pourcent");
-				
-				//$(this).off(); Désactiver un lien
-			});
-			//Gestion de vote: FIN
-
-		
-			jQuery.fn.reset = function () {
-			  $(this).each (function() { this.reset(); });
-			}
-			//Gestion des commentaires
-			$("#submitComment").click(
-					function() {
-						var idDiscussion = $(this).attr('idDiscussion');
-						$("#formComment").ajaxSubmit(
-								{
-									error : function() {
-										alert("Il y a une erreur AJAX");
-									},
-									beforeSubmit : function() {
-									},
-									success: function(e) {	
-										$('#formComment').reset();
-										$("head").append("<link rel='stylesheet' href='/Cahier_de_charge/PAGES/css/cssDemande.css'  type='text/css'/>");
-										$(".comments").load("/Cahier_de_charge/afficherDiscussion.do?discussionId=" + idDiscussion + " .comments");
-																			
-									}
-								});
-						
-			});
-			
-			//Gestion de suivi d'une demande
-			$('#suivreLink').click(function(){
-				var demandeId = $(this).attr('demandeId');
-				$.ajax({
-					   type: "POST",
-					   url: "/Cahier_de_charge/suivreDemande.do",
-					   data: "demandeId="+demandeId,
-					   success: function(msg){					  
-						  $("#suivreLink").hide();  			   
-					   }
-					 });
-				
-				//$(this).off(); Désactiver un lien
-			});
-			//Gestion de suivi d'une demande: FIN
-	    
-	    
-		    //Mouseover/Mouseout une demande
-		    $( "#contenuDemande" ).mouseover(function() {
-		    	$("#modifier").show();
-		    });
-		    $( ".contenu" ).mouseout(function() {
-		    	$("#modifier").hide();
-		    });
-		    
-		    //Mouseover/Mouseout le pourcentage
-		    $( "#pourcentage" ).mouseover(function() {
-		    	$("#pourcent").show();
-		    });
-		    $( ".contenu" ).mouseout(function() {
-		    	$("#pourcentage").hide();
-		    });
-		
-		});		
-	</script>
 
 </head>
 <body>
@@ -167,6 +81,7 @@
 				<div class='commentContent'>
 					<bean:write name="commento" property="content" filter="false" />
 				</div>
+				<div class="repondre" id="${commento.commentId}">Répondre</div>
 				<logic:notEmpty name="commento" property="reponses">
 					<div class='subComments'>
 						<div class='reduce'>_</div>
@@ -191,7 +106,8 @@
 	</html:form>
 	<input type="submit" name="submit" id="submitComment" idDiscussion="${discussion.id}"/>
 
-
+		
+		
 	<script>
 		$('.jqte-test').jqte();
 
@@ -220,6 +136,125 @@
 	        }
 	        return '';
 	    }
+	</script>
+	
+	<script type="text/javascript">
+			$(document).ready(function(){
+				$('body').on('click', '.reduce', function(){ 
+				   $(this).siblings().andSelf().slideToggle('fast');
+				});				
+		
+			
+			//Gestion de vote
+			$('.voter').click(function(){
+				var context = $(this).attr('context');
+				var demandeId = $(this).attr('idDemande');				
+				
+				var vote = $(this).attr('value');
+				$.ajax({
+					   		type: "POST",
+					   		url: context+"/voterDemande.do",
+					   		data: "id="+demandeId+"&vote="+vote,
+					   		success: function(msg){							   
+						   
+					   }
+					 });
+				//$("#pourcent").load("/Cahier_de_charge/afficherDiscussion.do?discussionId=" + idDiscussion + " #pourcent");
+				
+				//$(this).off(); Désactiver un lien
+			});
+			//Gestion de vote: FIN
+
+		
+			
+			//Gestion des commentaires
+			$("#submitComment").click(
+					function() {
+						var idDiscussion = $(this).attr('idDiscussion');
+						$("#formComment").ajaxSubmit(
+								{
+									error : function() {
+										alert("Il y a une erreur AJAX");
+									},
+									beforeSubmit : function() {
+									},
+									success: function(e) {	
+										//$('#formComment').reset();
+										//$("head").append("<link rel='stylesheet' href='/Cahier_de_charge/PAGES/css/cssDemande.css'  type='text/css'/>");
+										$(".comments").load("/Cahier_de_charge/afficherDiscussion.do?discussionId=" + idDiscussion + " .comments");
+																			
+									}
+								});
+						
+			});
+			
+			
+			
+			//Gestion de réponse sur un commentaire
+			$('.comment').on('click', '.repondre', function(){
+				var commentId = $(this).attr('id');
+				$form = $("<form action='/Cahier_de_charge/sauvegarderCommentaire.do' id='reponseForm'></form>");	
+				$form.append("<input type='text' name='comment' class='jqte-test'> <br>");
+				$form.append("<input type='text' name='commentId' value='" + commentId + "'/>");				
+				$(this).replaceWith($form);
+				$form.after("<input  type='submit' name='submit' class='saveReponse'/>");	
+				
+		    });			
+			//Gestion de réponse sur un commentaire: FIN
+			
+			//$(".saveReponse").click(
+			//		function() 
+					
+					
+				$('.comment').on('click', '.saveReponse', function(){						
+						$("#reponseForm").ajaxSubmit(
+								{
+									error : function() {
+										alert("Il y a une erreur AJAX");
+									},
+									
+									success: function(e) {	
+										alert("Il y a une ok AJAX");															
+									}
+								});
+						alert("Il y a une wach AJAX");	
+						
+			});
+			
+			//Gestion de suivi d'une demande
+			$('#suivreLink').click(function(){
+				var demandeId = $(this).attr('demandeId');
+				$.ajax({
+					   type: "POST",
+					   url: "/Cahier_de_charge/suivreDemande.do",
+					   data: "demandeId="+demandeId,
+					   success: function(msg){					  
+						  $("#suivreLink").hide();  			   
+					   }
+					 });
+				
+				//$(this).off(); Désactiver un lien
+			});
+			//Gestion de suivi d'une demande: FIN
+	    
+	    
+		    //Mouseover/Mouseout une demande
+		    $( "#contenuDemande" ).mouseover(function() {
+		    	$("#modifier").show();
+		    });
+		    $( ".contenu" ).mouseout(function() {
+		    	$("#modifier").hide();
+		    });
+		    
+		    //Mouseover/Mouseout le pourcentage
+		    $( "#pourcentage" ).mouseover(function() {
+		    	$("#pourcent").show();
+		    });
+		    $( ".contenu" ).mouseout(function() {
+		    	$("#pourcentage").hide();
+		    });
+		
+		});		
 	</script>
 </body>
 

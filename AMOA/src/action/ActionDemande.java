@@ -190,16 +190,16 @@ public class ActionDemande extends MappingDispatchAction{
 	}
 	
 	//Affichage detaillé d'une demande pour qu'elle soit modifier
-		public ActionForward affichage2(ActionMapping mapping, ActionForm form,
-				HttpServletRequest request, HttpServletResponse response)
-				throws Exception {
+	public ActionForward affichage2(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 
-			//HttpSession session = request.getSession();
-			Demande demande = null;
-			demande = (Demande) daoDemande.get(Integer.parseInt(request.getParameter("demandeId")));
-			request.setAttribute("demande", demande);
-			return mapping.findForward("success");
-		}
+		//HttpSession session = request.getSession();
+		Demande demande = null;
+		demande = (Demande) daoDemande.get(Integer.parseInt(request.getParameter("demandeId")));
+		request.setAttribute("demande", demande);
+		return mapping.findForward("success");
+	}
 	
 	//Enregisrer les modifications effectuées sur une demande
 	public ActionForward modifier(ActionMapping mapping, ActionForm form,

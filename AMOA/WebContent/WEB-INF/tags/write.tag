@@ -13,6 +13,7 @@
 			<div class='commentContent'>
 				${rep.content}
 			</div>
+			<div class="repondre">Répondre</div>
 			<logic:notEmpty name="rep" property="reponses">
 				<div class='subComments'>
 					<div class='reduce'>_</div>
