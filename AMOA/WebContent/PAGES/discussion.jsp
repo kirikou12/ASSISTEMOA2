@@ -192,12 +192,19 @@
 			
 			//Gestion de réponse sur un commentaire
 			$('.comment').on('click', '.repondre', function(){
+				$('.saveReponse').hide();
+				$('.reponseForm').hide();
+				$('.repondre').show();
+				
+				
 				var commentId = $(this).attr('id');
-				$form = $("<form action='/Cahier_de_charge/sauvegarderCommentaire.do' id='reponseForm'></form>");	
+				$form = $("<form action='/Cahier_de_charge/sauvegarderCommentaire.do' class='reponseForm'></form>");	
 				$form.append("<input type='text' name='comment' class='jqte-test'> <br>");
-				$form.append("<input type='text' name='commentId' value='" + commentId + "'/>");				
-				$(this).replaceWith($form);
-				$form.after("<input  type='submit' name='submit' class='saveReponse'/>");	
+				$form.append("<input type='hidden' name='commentId' value='" + commentId + "'/>");				
+				$(this).hide();
+				$(this).after($form);
+				$form.after("<input  type ='submit' name='submit' class='saveReponse' style='margin-top:-11px;'/>");
+				$('.jqte-test').jqte();
 				
 		    });			
 			//Gestion de réponse sur un commentaire: FIN
@@ -207,19 +214,16 @@
 					
 					
 				$('.comment').on('click', '.saveReponse', function(){						
-						$("#reponseForm").ajaxSubmit(
+						$(".reponseForm").ajaxSubmit(
 								{
 									error : function() {
 										alert("Il y a une erreur AJAX");
-									},
-									
-									success: function(e) {	
-										alert("Il y a une ok AJAX");															
+									},									
+									success: function(e) {															
 									}
 								});
-						alert("Il y a une wach AJAX");	
 						
-			});
+				});
 			
 			//Gestion de suivi d'une demande
 			$('#suivreLink').click(function(){
