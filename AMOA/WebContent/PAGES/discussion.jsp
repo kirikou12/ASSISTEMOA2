@@ -17,7 +17,13 @@
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.css">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/PAGES/texteditLibs/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 <!-- Fin Text editor includes -->
-			
+	<style type="text/css">
+		.toutLesComments{
+			background: red;
+			width: 700px;
+			//margin-left: 180px;
+		}
+	</style>		
 			
 
 </head>
@@ -71,7 +77,7 @@
 
 
 
-
+<div class="toutLesComments">
 	<div class="comments">
 		<logic:iterate id="commento" name="discussion" property="comments">
 			<div class='comment'>
@@ -93,6 +99,7 @@
 
 		</logic:iterate>
 	</div>
+</div>
 
 	<br>
 	<html:form action="/sauvegarderCommentaire.do" styleId="formComment">
