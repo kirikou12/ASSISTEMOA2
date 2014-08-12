@@ -67,7 +67,8 @@
       <logic:iterate id="notif" name="membre" property="notifications"> 
       		<logic:equal value="true" name="notif" property="vue">
       			<li class=" notif">
-		          <a href="#">
+      			
+		          <a href="${pageContext.request.contextPath}/afficherNotif.do">
 			            <div class="imageblock"><img src="https://si0.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png" class="notifimage"  />
 			            </div> 
 			            <div class="messageblock">

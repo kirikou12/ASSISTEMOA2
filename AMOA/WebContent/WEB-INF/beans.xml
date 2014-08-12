@@ -19,6 +19,7 @@
 	<bean id="DAOAvis" class="dao.hibernate.DAOAvisHBM"/>
 	<bean id="DAOReaction" class="dao.hibernate.DAOReactionHBM"/>
 	<bean id="DAOProjet" class="dao.hibernate.DAOProjetHBM"/>
+	<bean id="DAONotification" class="dao.hibernate.DAONotificationHBM"/>
 		
 
 
@@ -237,5 +238,17 @@
 		           <ref bean="DAODemande"/>
 		       </property> 		           
 		</bean>
+		
+		
+		
+		
+<!-- NOTIFICATION -->
+
+		<bean name="/afficherNotif" class="action.ActionNotification">
+		       <property name="daoNotification">
+		           <ref bean="DAONotification"/>
+		       </property>  
+		</bean>
+		
 	
 </beans>

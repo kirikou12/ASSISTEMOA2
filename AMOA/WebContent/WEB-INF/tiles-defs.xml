@@ -116,5 +116,13 @@
 		<put name="content" value="/PAGES/offreForm.jsp" />
 	</definition>
 	
+	
+	
+	
+	<definition name="afficherNotif" extends="welcome">
+		<put name="title" type="string" value="Une notification" />
+		<put name="content" value="/PAGES/notification.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

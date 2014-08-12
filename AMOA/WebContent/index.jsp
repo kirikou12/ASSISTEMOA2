@@ -20,7 +20,7 @@
 								<html:text property="firstNam"  styleClass="input"/>								
 							</div>
 							<div>
-								<label><bean:message key="firstname.label"/>:</label>
+								<label><bean:message key="name.label"/>:</label>
 								<html:text property="lastName" styleClass="input"/>
 							</div>
 							<div>

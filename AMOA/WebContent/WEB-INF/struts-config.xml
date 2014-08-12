@@ -75,8 +75,10 @@
                 
         <action path="/offreForm" forward="offreForm" />
         
+        <action path="/manuels" forward="manuels" />
         
-        
+        <action path="/notification" forward="notification" />
+       
         
         
         <action path="/showProjets"
@@ -383,6 +385,20 @@
     			input="/PAGES/offreForm.jsp"
     			scope="request">
 		    
+		</action>
+		
+		
+<!-- Les actions qui concernent une Notification -->
+		
+		<action path="/afficherNotif"
+		    	type="org.springframework.web.struts.DelegatingActionProxy" 
+    			parameter="showNotif"   			
+    			validate="true"
+    			name="beanOffre"
+    			input="/PAGES/welcome.jsp"
+    			scope="request">
+    			
+    			<forward name="succes" path="/notification.do" />		    
 		</action>	
     	    	
     </action-mappings>
