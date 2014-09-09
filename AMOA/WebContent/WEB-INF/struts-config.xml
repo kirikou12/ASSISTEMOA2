@@ -392,9 +392,8 @@
 		
 		<action path="/afficherNotif"
 		    	type="org.springframework.web.struts.DelegatingActionProxy" 
-    			parameter="showNotif"   			
+    			parameter="afficher"   			
     			validate="true"
-    			name="beanOffre"
     			input="/PAGES/welcome.jsp"
     			scope="request">
     			

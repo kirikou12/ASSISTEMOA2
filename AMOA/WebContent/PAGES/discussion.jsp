@@ -19,7 +19,7 @@
 <!-- Fin Text editor includes -->
 	<style type="text/css">
 		.toutLesComments{
-			background: red;
+			//background: red;
 			width: 700px;
 			//margin-left: 180px;
 		}

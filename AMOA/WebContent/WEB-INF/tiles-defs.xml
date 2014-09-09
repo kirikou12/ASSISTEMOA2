@@ -119,7 +119,7 @@
 	
 	
 	
-	<definition name="afficherNotif" extends="welcome">
+	<definition name="notification" extends="welcome">
 		<put name="title" type="string" value="Une notification" />
 		<put name="content" value="/PAGES/notification.jsp" />
 	</definition>

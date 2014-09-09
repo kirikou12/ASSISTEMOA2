@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	${notification.date}, <br>
+	<bean:write name="notification" property="objet"/>
 </body>
 </html>
